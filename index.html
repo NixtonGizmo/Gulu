@@ -24,10 +24,10 @@
             color: var(--text-dark);
             padding: 20px;
             box-sizing: border-box;
-            gap: 15px; /* Spacing between boxes */
+            gap: 15px;
         }
 
-        /* The Separate Box Design */
+        /* Separate Box Layout */
         .box {
             background: rgba(255, 255, 255, 0.98);
             padding: 20px;
@@ -39,225 +39,146 @@
             text-align: center;
         }
 
-        /* Specific Box Styles */
-        .box-header {
-            border-bottom: 4px solid var(--pink-main);
-        }
+        h1 { color: var(--pink-main); font-size: 26px; margin: 0 0 5px 0; }
+        .subtitle { font-size: 14px; color: #888; }
+        
         .box-note {
             background: var(--pink-bg);
             border: 2px solid var(--pink-light);
-            font-size: 16px;
-            font-style: italic;
-            color: #800f2f;
+            font-size: 16px; font-style: italic; color: #800f2f;
             line-height: 1.4;
         }
-        .box-calendar {
-            padding: 15px 10px;
-        }
-        
-        h1 {
-            color: var(--pink-main);
-            font-size: 26px;
-            margin: 0 0 5px 0;
-        }
-        .subtitle {
-            font-size: 14px;
-            color: #888;
-        }
 
-        /* Phase Summary */
-        .summary-container {
+        /* Scrollable Map */
+        .box-calendar { padding: 15px 5px; cursor: pointer; }
+        .scrollable-map {
             display: flex;
-            justify-content: space-between;
+            overflow-x: auto;
             gap: 10px;
-        }
-        .summary-item {
-            flex: 1;
-            background: #f8f9fa;
             padding: 10px 5px;
-            border-radius: 15px;
-            border: 1px solid #eee;
+            scroll-behavior: smooth;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
-        .summary-title {
-            font-size: 12px;
-            color: #666;
-            margin-bottom: 8px;
-            height: 30px;
-        }
-        .summary-value {
-            font-weight: bold;
-            font-size: 13px;
-            background: white;
-            padding: 6px 0;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 4px;
-        }
-        .val-ovulation { color: var(--green-main); }
-        .val-pms { color: var(--grey-main); }
-        .val-period { color: var(--pink-main); }
-
-        /* Weekly Calendar View */
-        .week-container {
-            display: flex;
-            justify-content: space-between;
-        }
-        .day-col {
+        .scrollable-map::-webkit-scrollbar { display: none; }
+        
+        .day-card {
+            min-width: 52px;
+            padding: 12px 0;
+            border-radius: 18px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 13%;
+            background: transparent;
+            transition: transform 0.2s;
         }
-        .day-name {
-            font-size: 11px;
-            color: #888;
-            text-transform: uppercase;
-            font-weight: bold;
-            margin-bottom: 5px;
+        .day-card.today {
+            border: 2px dashed var(--text-dark);
         }
-        .day-number {
-            font-size: 16px;
-            width: 35px;
-            height: 35px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-        }
-        .day-col.today .day-name { color: var(--green-main); }
-        .day-col.today .day-number {
-            border: 2px dashed var(--green-main);
-            color: var(--green-main);
-            font-weight: bold;
-        }
-        .dot {
-            height: 6px;
-            width: 6px;
-            background-color: var(--text-dark);
-            border-radius: 50%;
-            margin-top: 2px;
-            display: none;
-        }
-        .day-col.today .dot { display: block; }
-
-        /* Countdown & Update */
-        .countdown-text {
-            font-size: 18px;
-            font-weight: bold;
-            color: #800f2f;
-        }
-        label {
-            display: block;
-            margin-bottom: 10px;
-            font-size: 13px;
-            color: #888;
-        }
-        input[type="date"] {
-            padding: 10px;
-            border-radius: 10px;
-            border: 1px solid var(--pink-light);
-            font-family: inherit;
-            color: var(--text-dark);
-            width: 60%;
-            outline: none;
-            margin-bottom: 10px;
-        }
-        button {
+        .day-card.period {
             background: var(--pink-main);
             color: white;
-            padding: 12px 20px;
-            border-radius: 10px;
-            border: none;
-            font-weight: bold;
-            cursor: pointer;
-            width: 100%;
-            font-size: 16px;
-            transition: background 0.3s ease;
-            box-shadow: 0 4px 10px rgba(255, 77, 109, 0.3);
+            box-shadow: 0 4px 12px rgba(255, 77, 109, 0.4);
         }
-        button:hover { background: #c9184a; }
-        .heart {
-            color: var(--pink-main);
-            animation: beat 1.5s infinite;
-            display: inline-block;
+        .day-card.ovulation {
+            background: var(--green-main);
+            color: white;
+            box-shadow: 0 4px 12px rgba(156, 179, 21, 0.4);
         }
-        @keyframes beat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
+        .day-card .day-name { font-size: 11px; text-transform: uppercase; font-weight: bold; margin-bottom: 4px; opacity: 0.85; }
+        .day-card .day-num { font-size: 18px; font-weight: bold; }
+
+        .tap-hint { font-size: 11px; color: #aaa; margin-top: 8px; }
+
+        /* Full Map Modal & Cute Date Picker */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.4);
+            display: none; justify-content: center; align-items: center;
+            z-index: 1000; padding: 20px;
         }
-        .sync-status {
-            font-size: 11px;
-            color: #aaa;
-            margin-top: 10px;
+        .modal-content {
+            background: white; border-radius: 25px;
+            padding: 20px; width: 100%; max-width: 400px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            max-height: 90vh; overflow-y: auto;
         }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .close-btn { background: none; border: none; font-size: 24px; cursor: pointer; color: #888; }
+        
+        .calendar-grid {
+            display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px;
+        }
+        .cal-header { font-size: 12px; color: #888; font-weight: bold; padding-bottom: 8px; text-align: center;}
+        .cal-cell {
+            aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+            border-radius: 50%; font-size: 14px; cursor: pointer; font-weight: 500;
+        }
+        .cal-cell.period { background: var(--pink-main); color: white; }
+        .cal-cell.ovulation { background: var(--green-main); color: white; }
+        .cal-cell:hover { background: #f0f0f0; }
+
+        /* Cute Buttons & Status */
+        .cute-btn {
+            background: var(--pink-light); color: var(--text-dark);
+            padding: 12px 20px; border-radius: 15px; border: 2px dashed var(--pink-main);
+            font-weight: bold; cursor: pointer; width: 100%; font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        .cute-btn:hover { background: var(--pink-main); color: white; border-style: solid; }
+        .sync-status { font-size: 11px; color: #aaa; margin-top: 10px; }
+        .countdown-text { font-size: 18px; font-weight: bold; color: #800f2f; }
     </style>
 </head>
 <body>
 
     <!-- Box 1: Header -->
-    <div class="box box-header">
-        <h1>Hi, Gulu! <span class="heart">❤️</span></h1>
+    <div class="box" style="border-bottom: 4px solid var(--pink-main);">
+        <h1>Hi, Gulu! ❤️</h1>
         <div class="subtitle">Your personal tracker, made with love.</div>
     </div>
 
     <!-- Box 2: Daily Note -->
-    <div class="box box-note" id="dailyNote">
-        Loading your daily sweet note...
+    <div class="box box-note" id="dailyNote">Loading your daily sweet note...</div>
+
+    <!-- Box 3: Scrollable Weekly Map -->
+    <div class="box box-calendar" onclick="openFullMap()">
+        <div class="scrollable-map" id="scrollMap"></div>
+        <div class="tap-hint">👆 Tap map to open full month view</div>
     </div>
 
-    <!-- Box 3: Phase Summary -->
-    <div class="box">
-        <div class="summary-container">
-            <div class="summary-item">
-                <div class="summary-title">Next<br>Ovulation</div>
-                <div class="summary-value val-ovulation">
-                    <span style="font-size: 18px;">◯</span> <span id="lbl-ovu">--</span>
-                </div>
-            </div>
-            <div class="summary-item">
-                <div class="summary-title">Next<br>PMS</div>
-                <div class="summary-value val-pms">
-                    ☁️ <span id="lbl-pms">--</span>
-                </div>
-            </div>
-            <div class="summary-item">
-                <div class="summary-title">Next<br>Menstruation</div>
-                <div class="summary-value val-period">
-                    🩸 <span id="lbl-per">--</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Box 4: Weekly Map -->
-    <div class="box box-calendar">
-        <div class="week-container" id="weekCalendar"></div>
-    </div>
-
-    <!-- Box 5: Countdown -->
+    <!-- Box 4: Countdown -->
     <div class="box">
         <div class="countdown-text" id="countdown">Calculating...</div>
     </div>
 
-    <!-- Box 6: Update Settings -->
+    <!-- Box 5: Update Date -->
     <div class="box">
-        <label>Did your cycle start on a new day? Update here:</label>
-        <input type="date" id="lastDateInput">
-        <button onclick="updateDate()" id="saveBtn">Save New Date</button>
+        <label style="color: #888; font-size: 13px; margin-bottom: 10px; display: block;">Did it start on a different day?</label>
+        <button class="cute-btn" onclick="openDatePicker()">🗓️ Update Start Date</button>
         <div class="sync-status" id="syncStatus">☁️ Connected</div>
     </div>
 
+    <!-- FULL MAP / DATE PICKER MODAL -->
+    <div class="modal-overlay" id="mapModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle" style="color: var(--pink-main); margin: 0; font-size: 20px;">Calendar Map</h2>
+                <button class="close-btn" onclick="closeModal()">×</button>
+            </div>
+            <div id="modalInstructions" style="font-size: 12px; color: #888; margin-bottom: 15px; display: none;">
+                Tap the exact day her period started to update it:
+            </div>
+            <div class="calendar-grid" id="fullCalendarGrid"></div>
+        </div>
+    </div>
+
     <script>
-        // --- ⚙️ SETTINGS ---
         const cycleLength = 26;
         const periodDuration = 7;
         
-        // 🔴 DATABASE SETUP (Read Step 2 below to get your URL)
-        // Paste your Firebase Realtime DB URL below. Keep the "/lastDate.json" at the end!
-        const DATABASE_URL = "YOUR_FIREBASE_URL_HERE/lastDate.json";
+        // 🔴 FIREBASE URL INTEGRATED HERE
+        const FIREBASE_URL = "https://gulu100103-default-rtdb.asia-southeast1.firebasedatabase.app/lastDate.json";
 
         const notes = [
             "You are my favorite notification. Have a beautiful day, Gulu! 💕",
@@ -293,144 +214,187 @@
             "You are my dream come true. Sweet dreams, my Gulu. 💭"
         ];
 
-        let lastPeriodDate = new Date('2026-07-06'); // Default backup
+        let lastPeriodDate = new Date('2026-07-06');
 
-        // --- DATABASE FUNCTIONS ---
-        async function fetchDateFromDB() {
-            try {
-                if (DATABASE_URL.includes("YOUR_FIREBASE_URL_HERE")) throw new Error("No DB Configured");
-                let response = await fetch(DATABASE_URL);
-                let dateStr = await response.json();
-                if (dateStr) {
-                    let [y, m, d] = dateStr.split('-');
-                    return new Date(y, m - 1, d);
-                }
-            } catch (error) {
-                console.log("Using Local Storage");
+        function getDayStatus(dateToCheck) {
+            const date = new Date(dateToCheck);
+            date.setHours(0,0,0,0);
+            const start = new Date(lastPeriodDate);
+            start.setHours(0,0,0,0);
+
+            const diffTime = date - start;
+            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            
+            let dayOfCycle = diffDays % cycleLength;
+            if (dayOfCycle < 0) dayOfCycle += cycleLength;
+
+            if (dayOfCycle >= 0 && dayOfCycle < periodDuration) return 'period';
+            if (dayOfCycle === 14) return 'ovulation';
+            return 'normal';
+        }
+
+        async function init() {
+            document.getElementById('dailyNote').innerText = notes[new Date().getDate() - 1];
+            document.getElementById('syncStatus').innerText = "☁️ Syncing data...";
+            
+            lastPeriodDate = await fetchDateFromDB();
+            
+            updateDisplay();
+            document.getElementById('syncStatus').innerText = "☁️ Up to date";
+        }
+
+        function updateDisplay() {
+            renderScrollableMap();
+            updateCountdown();
+        }
+
+        function renderScrollableMap() {
+            const container = document.getElementById('scrollMap');
+            container.innerHTML = '';
+            const today = new Date();
+            today.setHours(0,0,0,0);
+            const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+            for(let i = -15; i <= 15; i++) {
+                let d = new Date(today);
+                d.setDate(today.getDate() + i);
+                
+                const status = getDayStatus(d);
+                const isToday = i === 0;
+
+                let card = document.createElement('div');
+                card.className = `day-card ${status} ${isToday ? 'today' : ''}`;
+                if (isToday) card.id = 'todayCard';
+
+                card.innerHTML = `
+                    <div class="day-name">${daysOfWeek[d.getDay()]}</div>
+                    <div class="day-num">${d.getDate()}</div>
+                `;
+                container.appendChild(card);
             }
-            // Fallback to local storage if DB fails or isn't set up
-            let localStr = localStorage.getItem('guluDateStr');
-            if (localStr) {
-                let [y, m, d] = localStr.split('-');
+            
+            setTimeout(() => {
+                const todayEl = document.getElementById('todayCard');
+                if (todayEl) todayEl.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            }, 100);
+        }
+
+        function renderFullCalendar(forDatePicking = false) {
+            const grid = document.getElementById('fullCalendarGrid');
+            grid.innerHTML = '';
+            
+            const daysOfWeek = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+            daysOfWeek.forEach(day => {
+                grid.innerHTML += `<div class="cal-cell cal-header">${day}</div>`;
+            });
+
+            const today = new Date();
+            const startRenderDate = new Date(today.getFullYear(), today.getMonth(), 1);
+            const startDay = startRenderDate.getDay();
+            startRenderDate.setDate(startRenderDate.getDate() - startDay);
+
+            for(let i = 0; i < 42; i++) {
+                let cellDate = new Date(startRenderDate);
+                cellDate.setDate(startRenderDate.getDate() + i);
+                
+                const status = forDatePicking ? 'normal' : getDayStatus(cellDate);
+                
+                let cell = document.createElement('div');
+                cell.className = `cal-cell ${status}`;
+                if (cellDate.getMonth() !== today.getMonth()) cell.style.opacity = '0.3';
+                cell.innerText = cellDate.getDate();
+
+                if (forDatePicking) {
+                    cell.onclick = () => confirmNewDate(cellDate);
+                }
+
+                grid.appendChild(cell);
+            }
+        }
+
+        function updateCountdown() {
+            const today = new Date();
+            today.setHours(0,0,0,0);
+            const nextPeriod = new Date(lastPeriodDate);
+            nextPeriod.setDate(lastPeriodDate.getDate() + cycleLength);
+            
+            const checkDate = new Date(nextPeriod);
+            checkDate.setHours(0,0,0,0);
+            const diffTime = checkDate - today;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+            let txt = "";
+            if (diffDays > 0) txt = `⏳ ${diffDays} days left until period.`;
+            else if (diffDays <= 0 && diffDays > -periodDuration) txt = `🩸 Period active. Heating pad ready! ❤️`;
+            else txt = `⏰ It's ${Math.abs(diffDays)} days late!`;
+            
+            document.getElementById('countdown').innerText = txt;
+        }
+
+        function openFullMap() {
+            document.getElementById('modalTitle').innerText = "Cycle Map";
+            document.getElementById('modalInstructions').style.display = 'none';
+            renderFullCalendar(false);
+            document.getElementById('mapModal').style.display = 'flex';
+        }
+
+        function openDatePicker() {
+            document.getElementById('modalTitle').innerText = "Select Start Date";
+            document.getElementById('modalInstructions').style.display = 'block';
+            renderFullCalendar(true);
+            document.getElementById('mapModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('mapModal').style.display = 'none';
+        }
+
+        async function confirmNewDate(selectedDate) {
+            lastPeriodDate = selectedDate;
+            closeModal();
+            updateDisplay();
+            
+            let y = selectedDate.getFullYear();
+            let m = String(selectedDate.getMonth() + 1).padStart(2, '0');
+            let d = String(selectedDate.getDate()).padStart(2, '0');
+            let dateStr = `${y}-${m}-${d}`;
+            
+            await saveDateToDB(dateStr);
+            alert("New date saved globally! Gulu's phone will update automatically too. ❤️");
+        }
+
+        // --- DATABASE FETCH & SAVE ---
+        async function fetchDateFromDB() {
+            // Check if FIREBASE_URL has been modified from the placeholder
+            if (FIREBASE_URL.includes("PASTE_YOUR") === false) {
+                try {
+                    let res = await fetch(FIREBASE_URL);
+                    let dateStr = await res.json();
+                    if (dateStr) {
+                        let [y, m, d] = dateStr.split('-');
+                        return new Date(y, m - 1, d);
+                    }
+                } catch(e) { console.error("Firebase Fetch Error:", e); }
+            }
+            // Fallback to local storage if Firebase fails or is empty
+            let loc = localStorage.getItem('guluDateStr');
+            if (loc) {
+                let [y, m, d] = loc.split('-');
                 return new Date(y, m - 1, d);
             }
             return lastPeriodDate;
         }
 
         async function saveDateToDB(dateStr) {
-            localStorage.setItem('guluDateStr', dateStr); // Save locally first for instant feedback
-            if (!DATABASE_URL.includes("YOUR_FIREBASE_URL_HERE")) {
+            localStorage.setItem('guluDateStr', dateStr);
+            if (FIREBASE_URL.includes("PASTE_YOUR") === false) {
                 try {
-                    await fetch(DATABASE_URL, {
+                    await fetch(FIREBASE_URL, {
                         method: 'PUT',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(dateStr)
                     });
-                } catch (e) {
-                    console.error("Database save failed", e);
-                }
-            }
-        }
-
-        // --- APP LOGIC ---
-        function formatDateShort(date) {
-            const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-            let d = date.getDate();
-            return `${d < 10 ? '0'+d : d} ${months[date.getMonth()]}`;
-        }
-
-        async function init() {
-            const today = new Date();
-            document.getElementById('dailyNote').innerText = notes[today.getDate() - 1];
-            renderWeekCalendar(today);
-            
-            document.getElementById('syncStatus').innerText = "☁️ Syncing data...";
-            lastPeriodDate = await fetchDateFromDB();
-            updateDisplay();
-            document.getElementById('syncStatus').innerText = "☁️ Up to date";
-        }
-
-        function renderWeekCalendar(today) {
-            const calendarEl = document.getElementById('weekCalendar');
-            calendarEl.innerHTML = '';
-            const daysOfWeek = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
-            let startDay = new Date(today);
-            startDay.setDate(today.getDate() - 3);
-
-            for(let i = 0; i < 7; i++) {
-                let currentDay = new Date(startDay);
-                currentDay.setDate(startDay.getDate() + i);
-                let isToday = (currentDay.getDate() === today.getDate() && currentDay.getMonth() === today.getMonth());
-                
-                let col = document.createElement('div');
-                col.className = 'day-col' + (isToday ? ' today' : '');
-                col.innerHTML = `
-                    <div class="day-name">${daysOfWeek[currentDay.getDay()]}</div>
-                    <div class="dot"></div>
-                    <div class="day-number">${currentDay.getDate()}</div>
-                `;
-                calendarEl.appendChild(col);
-            }
-        }
-
-        function updateDisplay() {
-            const today = new Date();
-            today.setHours(0,0,0,0);
-
-            const nextPeriod = new Date(lastPeriodDate);
-            nextPeriod.setDate(lastPeriodDate.getDate() + cycleLength);
-            
-            const periodEnd = new Date(nextPeriod);
-            periodEnd.setDate(nextPeriod.getDate() + (periodDuration - 1));
-
-            const ovulation = new Date(lastPeriodDate);
-            ovulation.setDate(lastPeriodDate.getDate() + 14); 
-
-            const pmsStart = new Date(nextPeriod);
-            pmsStart.setDate(nextPeriod.getDate() - 3);
-            const pmsEnd = new Date(nextPeriod);
-            pmsEnd.setDate(nextPeriod.getDate() - 1);
-
-            document.getElementById('lbl-ovu').innerText = formatDateShort(ovulation);
-            document.getElementById('lbl-pms').innerText = `${pmsStart.getDate()}-${formatDateShort(pmsEnd)}`;
-            document.getElementById('lbl-per').innerText = `${nextPeriod.getDate() < 10 ? '0'+nextPeriod.getDate() : nextPeriod.getDate()}-${formatDateShort(periodEnd)}`;
-
-            const checkDate = new Date(nextPeriod);
-            checkDate.setHours(0,0,0,0);
-            const diffTime = checkDate - today;
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-            let countdownText = "";
-            if (diffDays > 0) {
-                countdownText = `⏳ ${diffDays} days left until period.`;
-            } else if (diffDays <= 0 && diffDays > -periodDuration) {
-                countdownText = `🩸 Period active. Heating pad ready! ❤️`;
-            } else {
-                countdownText = `⏰ It's ${Math.abs(diffDays)} days late! (Update date below if it started) 🌸`;
-            }
-            document.getElementById('countdown').innerText = countdownText;
-            
-            // Format for HTML date input: YYYY-MM-DD
-            let y = lastPeriodDate.getFullYear();
-            let m = String(lastPeriodDate.getMonth() + 1).padStart(2, '0');
-            let d = String(lastPeriodDate.getDate()).padStart(2, '0');
-            document.getElementById('lastDateInput').value = `${y}-${m}-${d}`;
-        }
-
-        async function updateDate() {
-            const inputVal = document.getElementById('lastDateInput').value; // Format: YYYY-MM-DD
-            if (inputVal) {
-                let btn = document.getElementById('saveBtn');
-                btn.innerText = "Saving...";
-                
-                let [y, m, d] = inputVal.split('-');
-                lastPeriodDate = new Date(y, m - 1, d); // Safe timezone parsing
-                
-                await saveDateToDB(inputVal);
-                updateDisplay();
-                
-                btn.innerText = "Save New Date";
-                alert("Date saved globally! It will now update on Gulu's phone too. ❤️");
+                } catch(e) { console.error("Firebase Save Error:", e); }
             }
         }
 
