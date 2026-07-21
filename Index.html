@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Lovely Gulu ❤️</title>
+    <style>
+        :root {
+            --pink-main: #ff4d6d;
+            --pink-light: #ffccd5;
+            --pink-bg: #fff0f3;
+            --green-main: #9cb315;
+            --grey-main: #b0b0b0;
+            --text-dark: #5a3a45;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ffe6ea 0%, #fdfbfb 100%);
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-dark);
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .dashboard {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 30px 20px;
+            border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(255, 143, 163, 0.2);
+            max-width: 450px;
+            width: 100%;
+            text-align: center;
+            border: 3px solid var(--pink-light);
+        }
+        h1 {
+            color: var(--pink-main);
+            font-size: 26px;
+            margin: 0 0 5px 0;
+        }
+        .subtitle {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 20px;
+        }
+        
+        /* Daily Note */
+        .daily-note {
+            background: var(--pink-bg);
+            padding: 15px;
+            border-radius: 20px;
+            font-size: 16px;
+            font-style: italic;
+            margin-bottom: 25px;
+            color: #800f2f;
+            line-height: 1.4;
+            box-shadow: inset 0 2px 10px rgba(255, 77, 109, 0.1);
+        }
+
+        /* Phase Summary Card */
+        .summary-card {
+            background: #f8f9fa;
+            border-radius: 20px;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            border: 1px solid #eee;
+        }
+        .summary-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 30%;
+        }
+        .summary-title {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 8px;
+            height: 30px;
+        }
+        .summary-value {
+            font-weight: bold;
+            font-size: 14px;
+            background: white;
+            padding: 8px 5px;
+            border-radius: 12px;
+            width: 100%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        .val-ovulation { color: var(--green-main); }
+        .val-pms { color: var(--grey-main); }
+        .val-period { color: var(--pink-main); }
+
+        /* Weekly Calendar View */
+        .week-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            padding: 10px 0;
+            border-top: 1px dashed var(--pink-light);
+            border-bottom: 1px dashed var(--pink-light);
+        }
+        .day-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 13%;
+        }
+        .day-name {
+            font-size: 11px;
+            color: #888;
+            text-transform: uppercase;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .day-number {
+            font-size: 16px;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        .day-col.today .day-name {
+            color: var(--green-main);
+        }
+        .day-col.today .day-number {
+            border: 2px dashed var(--green-main);
+            color: var(--green-main);
+            font-weight: bold;
+        }
+        .dot {
+            height: 6px;
+            width: 6px;
+            background-color: var(--text-dark);
+            border-radius: 50%;
+            margin-top: 2px;
+            display: none;
+        }
+        .day-col.today .dot {
+            display: block;
+        }
+
+        /* Countdown & Update */
+        .countdown {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: var(--pink-light);
+            border-radius: 15px;
+            color: #800f2f;
+        }
+        .update-section {
+            background: #fff;
+            padding: 15px;
+            border-radius: 15px;
+            border: 1px solid #eee;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 13px;
+            color: #888;
+        }
+        input[type="date"] {
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid var(--pink-light);
+            font-family: inherit;
+            color: var(--text-dark);
+            width: 60%;
+            outline: none;
+        }
+        button {
+            background: var(--pink-main);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            width: 100%;
+            font-size: 16px;
+            transition: background 0.3s ease;
+            box-shadow: 0 4px 10px rgba(255, 77, 109, 0.3);
+        }
+        button:hover {
+            background: #c9184a;
+        }
+        .heart {
+            color: var(--pink-main);
+            animation: beat 1.5s infinite;
+            display: inline-block;
+        }
+        @keyframes beat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="dashboard">
+        <h1>Hi, Gulu! <span class="heart">❤️</span></h1>
+        <div class="subtitle">Your personal tracker, made with love.</div>
+        
+        <div class="daily-note" id="dailyNote">
+            Loading your daily sweet note...
+        </div>
+
+        <!-- Phase Summary Card like IMG_20260721_194045 -->
+        <div class="summary-card">
+            <div class="summary-item">
+                <div class="summary-title">Next<br>Ovulation</div>
+                <div class="summary-value val-ovulation">
+                    <span style="font-size: 18px;">◯</span> <span id="lbl-ovu">--</span>
+                </div>
+            </div>
+            <div class="summary-item">
+                <div class="summary-title">Next<br>PMS</div>
+                <div class="summary-value val-pms">
+                    ☁️ <span id="lbl-pms">--</span>
+                </div>
+            </div>
+            <div class="summary-item">
+                <div class="summary-title">Next<br>Menstruation</div>
+                <div class="summary-value val-period">
+                    🩸 <span id="lbl-per">--</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Weekly Calendar View like IMG_20260721_194058 -->
+        <div class="week-container" id="weekCalendar">
+            <!-- JavaScript will populate days here -->
+        </div>
+
+        <!-- Countdown -->
+        <div class="countdown" id="countdown">...</div>
+
+        <!-- Update Form -->
+        <div class="update-section">
+            <label>Did your cycle start on a new day? Update here:</label>
+            <input type="date" id="lastDateInput">
+            <button onclick="updateDate()">Save New Date</button>
+        </div>
+    </div>
+
+    <script>
+        const cycleLength = 26;
+        const periodDuration = 7; // Assuming 7 days of bleeding based on screenshot
+        
+        // 31 Sweet notes
+        const notes = [
+            "You are my favorite notification. Have a beautiful day, Gulu! 💕",
+            "Just a daily reminder that you are deeply loved and cherished. 🥰",
+            "Drink some water, take a deep breath, and know I'm thinking of you! 💧",
+            "Your smile is my favorite thing in the whole world. Keep shining! ✨",
+            "I'm so incredibly lucky to have you in my life. ❤️",
+            "Whatever today brings, we handle it together. I love you! 🌸",
+            "You are stronger and more beautiful than you know, Gulu! 🦋",
+            "Sending you a massive virtual hug right now! 🤗",
+            "You make every single day better just by being in it. ☀️",
+            "Don't forget to treat yourself today. You deserve the world! 🍫",
+            "I love you more today than I did yesterday. ❤️",
+            "You are my safe place and my favorite adventure. 🌍",
+            "Take it easy today, Gulu. I'm always right here for you. 🛋️",
+            "Your laugh is my favorite melody. Hope you smile a lot today! 🎶",
+            "Just dropping in to say: You are absolutely perfect to me. 😍",
+            "You're doing amazing, sweetie! Keep going! 🌟",
+            "I hope your day is as sweet and beautiful as you are. 🌷",
+            "If you're feeling tired, rest. I've got your back, always. 🛌",
+            "You are the best thing that ever happened to me. 💖",
+            "Every day I spend with you is my new favorite day. 📆",
+            "I'm sending you all my energy and love today! ⚡❤️",
+            "You are a literal angel. Never forget that! 👼",
+            "I'm so proud of you and everything you do. 🏆",
+            "You mean the universe to me, Gulu. 🌌",
+            "Take a moment to relax today. You've earned it! 🛀",
+            "You're my forever favorite person. 👩‍❤️‍👨",
+            "I love you past the moon and the stars! 🚀",
+            "Whenever you feel stressed, remember I'm just a call away. 📞",
+            "You look gorgeous today (I just know it!). 👗",
+            "My love for you grows bigger every single day. 📈",
+            "You are my dream come true. Sweet dreams, my Gulu. 💭"
+        ];
+
+        let lastPeriodDate = localStorage.getItem('guluLastDate') 
+            ? new Date(localStorage.getItem('guluLastDate')) 
+            : new Date('2026-07-06');
+
+        // Helper to format dates like "20 Jul"
+        function formatDateShort(date) {
+            const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            let d = date.getDate();
+            let m = months[date.getMonth()];
+            return `${d < 10 ? '0'+d : d} ${m}`;
+        }
+
+        function init() {
+            const today = new Date();
+            document.getElementById('dailyNote').innerText = notes[today.getDate() - 1];
+            updateDisplay();
+            renderWeekCalendar();
+        }
+
+        function renderWeekCalendar() {
+            const calendarEl = document.getElementById('weekCalendar');
+            calendarEl.innerHTML = '';
+            
+            const today = new Date();
+            const daysOfWeek = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+
+            // Find the Monday of the current week (or adjust to show past 3 & next 3 days)
+            // Let's just center on today to make it easy and always relevant!
+            let startDay = new Date(today);
+            startDay.setDate(today.getDate() - 3);
+
+            for(let i = 0; i < 7; i++) {
+                let currentDay = new Date(startDay);
+                currentDay.setDate(startDay.getDate() + i);
+                
+                let isToday = (currentDay.getDate() === today.getDate() && currentDay.getMonth() === today.getMonth());
+                
+                let col = document.createElement('div');
+                col.className = 'day-col' + (isToday ? ' today' : '');
+                
+                col.innerHTML = `
+                    <div class="day-name">${daysOfWeek[currentDay.getDay()]}</div>
+                    <div class="dot"></div>
+                    <div class="day-number">${currentDay.getDate()}</div>
+                `;
+                calendarEl.appendChild(col);
+            }
+        }
+
+        function updateDisplay() {
+            const today = new Date();
+            today.setHours(0,0,0,0);
+
+            // Phase Calculations
+            const nextPeriod = new Date(lastPeriodDate);
+            nextPeriod.setDate(lastPeriodDate.getDate() + cycleLength);
+            
+            const periodEnd = new Date(nextPeriod);
+            periodEnd.setDate(nextPeriod.getDate() + (periodDuration - 1));
+
+            const ovulation = new Date(lastPeriodDate);
+            ovulation.setDate(lastPeriodDate.getDate() + 14); 
+
+            const pmsStart = new Date(nextPeriod);
+            pmsStart.setDate(nextPeriod.getDate() - 3);
+            const pmsEnd = new Date(nextPeriod);
+            pmsEnd.setDate(nextPeriod.getDate() - 1);
+
+            // Update Summary Cards
+            document.getElementById('lbl-ovu').innerText = formatDateShort(ovulation);
+            document.getElementById('lbl-pms').innerText = `${pmsStart.getDate()}-${formatDateShort(pmsEnd)}`;
+            document.getElementById('lbl-per').innerText = `${nextPeriod.getDate() < 10 ? '0'+nextPeriod.getDate() : nextPeriod.getDate()}-${formatDateShort(periodEnd)}`;
+
+            // Countdown Logic
+            const checkDate = new Date(nextPeriod);
+            checkDate.setHours(0,0,0,0);
+            const diffTime = checkDate - today;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+            let countdownText = "";
+            if (diffDays > 0) {
+                countdownText = `⏳ ${diffDays} days left until period.`;
+            } else if (diffDays <= 0 && diffDays > -periodDuration) {
+                countdownText = `🩸 Period active. Heating pad ready! ❤️`;
+            } else {
+                countdownText = `⏰ It's ${Math.abs(diffDays)} days late! (Update date below if it started) 🌸`;
+            }
+            document.getElementById('countdown').innerText = countdownText;
+            
+            // Set input to current saved date
+            const localFormat = new Date(lastPeriodDate.getTime() - (lastPeriodDate.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
+            document.getElementById('lastDateInput').value = localFormat;
+        }
+
+        function updateDate() {
+            const inputVal = document.getElementById('lastDateInput').value;
+            if (inputVal) {
+                lastPeriodDate = new Date(inputVal);
+                localStorage.setItem('guluLastDate', lastPeriodDate.toISOString());
+                updateDisplay();
+                alert("Date saved successfully! Dashboard updated. ❤️");
+            }
+        }
+
+        window.onload = init;
+    </script>
+</body>
+  </html>
