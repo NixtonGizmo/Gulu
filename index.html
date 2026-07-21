@@ -9,7 +9,10 @@
             --pink-main: #ff4d6d;
             --pink-light: #ffccd5;
             --pink-bg: #fff0f3;
-            --green-main: #9cb315;
+            --green-main: #8db600;
+            --green-light: #e6ffb3;
+            --blue-main: #4fc3f7;
+            --blue-light: #e1f5fe;
             --grey-main: #b0b0b0;
             --text-dark: #5a3a45;
         }
@@ -40,7 +43,7 @@
         }
 
         h1 { color: var(--pink-main); font-size: 26px; margin: 0 0 5px 0; }
-        .subtitle { font-size: 14px; color: #888; }
+        .subtitle { font-size: 14px; color: #888; min-height: 20px; }
         
         .box-note {
             background: var(--pink-bg);
@@ -48,6 +51,11 @@
             font-size: 16px; font-style: italic; color: #800f2f;
             line-height: 1.4;
         }
+
+        /* Together Counter */
+        .together-box { padding: 15px 20px; }
+        .together-label { font-size: 12px; text-transform: uppercase; font-weight: bold; color: var(--pink-main); margin-bottom: 5px; letter-spacing: 1px; }
+        .together-time { font-size: 22px; font-weight: bold; color: var(--text-dark); font-family: 'Courier New', Courier, monospace; }
 
         /* Scrollable Map */
         .box-calendar { padding: 15px 5px; cursor: pointer; }
@@ -72,25 +80,117 @@
             background: transparent;
             transition: transform 0.2s;
         }
-        .day-card.today {
-            border: 2px dashed var(--text-dark);
-        }
-        .day-card.period {
-            background: var(--pink-main);
-            color: white;
-            box-shadow: 0 4px 12px rgba(255, 77, 109, 0.4);
-        }
-        .day-card.ovulation {
-            background: var(--green-main);
-            color: white;
-            box-shadow: 0 4px 12px rgba(156, 179, 21, 0.4);
-        }
+        .day-card.today { border: 2px dashed var(--text-dark); }
+        .day-card.period { background: var(--pink-main); color: white; box-shadow: 0 4px 12px rgba(255, 77, 109, 0.4); }
+        .day-card.ovulation { background: var(--green-main); color: white; box-shadow: 0 4px 12px rgba(141, 182, 0, 0.4); }
+        .day-card.safe { background: var(--blue-light); color: var(--blue-main); }
         .day-card .day-name { font-size: 11px; text-transform: uppercase; font-weight: bold; margin-bottom: 4px; opacity: 0.85; }
         .day-card .day-num { font-size: 18px; font-weight: bold; }
 
         .tap-hint { font-size: 11px; color: #aaa; margin-top: 8px; }
 
-        /* Full Map Modal & Cute Date Picker */
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .info-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 12px 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 2px solid #f0f0f0;
+        }
+        .info-card.ovulation-card { border-color: var(--green-main); background: var(--green-light); }
+        .info-card.pms-card { border-color: #ddd; background: #f9f9f9; }
+        .info-card.period-card { border-color: var(--pink-light); background: var(--pink-bg); }
+        
+        .info-icon { font-size: 20px; margin-bottom: 5px; }
+        .info-label { font-size: 10px; color: #888; text-transform: uppercase; font-weight: bold; margin-bottom: 3px; }
+        .info-date { font-size: 13px; font-weight: bold; color: var(--text-dark); text-align: center; line-height: 1.2; }
+        .ovulation-card .info-date { color: var(--green-main); }
+        .period-card .info-date { color: var(--pink-main); }
+
+        /* Inputs & Displays */
+        .craving-input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 15px;
+            border: 2px dashed var(--pink-main);
+            margin-bottom: 10px;
+            font-size: 14px;
+            box-sizing: border-box;
+            font-family: inherit;
+            color: var(--text-dark);
+        }
+        .display-box {
+            margin-top: 15px;
+            font-size: 15px;
+            font-weight: bold;
+            color: #800f2f;
+            background: var(--pink-bg);
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid var(--pink-light);
+            text-align: left;
+        }
+        .letter-item {
+            margin-top: 10px;
+            background: #fff;
+            border-left: 4px solid var(--pink-main);
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .letter-item .sender { font-size: 12px; color: var(--pink-main); font-weight: bold; margin-bottom: 5px; display: block; }
+        .letter-item .text { font-size: 14px; color: var(--text-dark); white-space: pre-wrap; }
+
+        /* Mood & Coupon Buttons */
+        .mood-buttons {
+            display: flex;
+            justify-content: space-around;
+            gap: 10px;
+            margin-bottom: 5px;
+        }
+        .mood-btn {
+            background: var(--pink-light);
+            border: 2px dashed var(--pink-main);
+            border-radius: 15px;
+            padding: 12px 5px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+            flex: 1;
+            line-height: 1.4;
+        }
+        .mood-btn:hover { background: var(--pink-main); color: white; }
+        
+        .coupon-item {
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border: 2px dashed var(--pink-main); 
+            border-radius: 12px; 
+            padding: 12px; 
+            margin-bottom: 10px; 
+            background: var(--pink-bg);
+        }
+        .coupon-item.redeemed { background: #f0f0f0; border-color: #ccc; opacity: 0.7; }
+        .coupon-text { font-size: 14px; font-weight: bold; color: #800f2f; text-align: left; flex: 1; padding-right: 10px; }
+        .coupon-item.redeemed .coupon-text { color: #888; text-decoration: line-through; }
+        .coupon-btn {
+            background: var(--pink-main); color: white; border: none;
+            padding: 8px 12px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 12px;
+        }
+        .coupon-btn.reset { background: var(--green-main); }
+
+        /* Full Map Modal */
         .modal-overlay {
             position: fixed; top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(0,0,0,0.4);
@@ -106,9 +206,19 @@
         .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
         .close-btn { background: none; border: none; font-size: 24px; cursor: pointer; color: #888; }
         
-        .calendar-grid {
-            display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px;
+        .month-nav {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 15px;
         }
+        .nav-btn {
+            background: var(--pink-bg); border: none; width: 34px; height: 34px;
+            border-radius: 50%; cursor: pointer; font-size: 20px; color: var(--pink-main);
+            font-weight: bold; display: flex; align-items: center; justify-content: center;
+            line-height: 0;
+        }
+        .nav-btn:hover { background: var(--pink-light); }
+
+        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
         .cal-header { font-size: 12px; color: #888; font-weight: bold; padding-bottom: 8px; text-align: center;}
         .cal-cell {
             aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
@@ -116,6 +226,7 @@
         }
         .cal-cell.period { background: var(--pink-main); color: white; }
         .cal-cell.ovulation { background: var(--green-main); color: white; }
+        .cal-cell.safe { background: var(--blue-light); color: var(--blue-main); }
         .cal-cell:hover { background: #f0f0f0; }
 
         /* Cute Buttons & Status */
@@ -127,7 +238,7 @@
         }
         .cute-btn:hover { background: var(--pink-main); color: white; border-style: solid; }
         .sync-status { font-size: 11px; color: #aaa; margin-top: 10px; }
-        .countdown-text { font-size: 18px; font-weight: bold; color: #800f2f; }
+        .countdown-text { font-size: 16px; font-weight: bold; color: #800f2f; }
     </style>
 </head>
 <body>
@@ -135,7 +246,13 @@
     <!-- Box 1: Header -->
     <div class="box" style="border-bottom: 4px solid var(--pink-main);">
         <h1>Hi, Gulu! ❤️</h1>
-        <div class="subtitle">Your personal tracker, made with love.</div>
+        <div class="subtitle" id="dynamicGreeting">Loading greeting...</div>
+    </div>
+
+    <!-- Box 1.5: Days Together Counter -->
+    <div class="box together-box">
+        <div class="together-label">❤️ Together For</div>
+        <div class="together-time" id="togetherCounter">0d 0h 0m 0s</div>
     </div>
 
     <!-- Box 2: Daily Note -->
@@ -147,16 +264,67 @@
         <div class="tap-hint">👆 Tap map to open full month view</div>
     </div>
 
-    <!-- Box 4: Countdown -->
+    <!-- Box 4: Dashboard & Countdown -->
     <div class="box">
+        <div class="dashboard-grid">
+            <div class="info-card ovulation-card">
+                <div class="info-icon">🌿</div>
+                <div class="info-label">Fertile Window</div>
+                <div class="info-date" id="nextOvulationDate">--</div>
+            </div>
+            <div class="info-card pms-card">
+                <div class="info-icon">☁️</div>
+                <div class="info-label">Next PMS</div>
+                <div class="info-date" id="nextPmsDate">--</div>
+            </div>
+            <div class="info-card period-card">
+                <div class="info-icon">🩸</div>
+                <div class="info-label">Next Period</div>
+                <div class="info-date" id="nextPeriodDate">--</div>
+            </div>
+        </div>
         <div class="countdown-text" id="countdown">Calculating...</div>
     </div>
 
-    <!-- Box 5: Update Date -->
+    <!-- Box 5: Update Date (MOVED HERE) -->
     <div class="box">
         <label style="color: #888; font-size: 13px; margin-bottom: 10px; display: block;">Did it start on a different day?</label>
         <button class="cute-btn" onclick="openDatePicker()">🗓️ Update Start Date</button>
         <div class="sync-status" id="syncStatus">☁️ Connected</div>
+    </div>
+
+    <!-- Box 6: Cravings & Care -->
+    <div class="box">
+        <div class="info-label" style="margin-bottom: 10px; font-size: 14px; color: var(--text-dark);">🍰 Gulu's Cravings & Care</div>
+        <input type="text" id="cravingInput" class="craving-input" placeholder="What are you craving today? (e.g. Chocolate)">
+        <button class="cute-btn" onclick="saveCraving()">Save Craving</button>
+        <div class="display-box" id="cravingDisplay">No cravings logged yet.</div>
+    </div>
+
+    <!-- Box 7: How is Gulu feeling? -->
+    <div class="box">
+        <div class="info-label" style="margin-bottom: 15px; font-size: 14px; color: var(--text-dark);">🧠 How is Gulu feeling today?</div>
+        <div class="mood-buttons">
+            <button class="mood-btn" onclick="saveMood('😊 Great')">😊<br>Great</button>
+            <button class="mood-btn" onclick="saveMood('😕 Okay')">😕<br>Okay</button>
+            <button class="mood-btn" onclick="saveMood('🥺 Needs a hug')">🥺<br>Hug</button>
+        </div>
+        <div class="display-box" id="moodDisplay">Haven't checked in yet today.</div>
+    </div>
+
+    <!-- Box 8: Love Letter Mailbox -->
+    <div class="box">
+        <div class="info-label" style="margin-bottom: 15px; font-size: 14px; color: var(--text-dark);">💌 Love Letter Mailbox</div>
+        <textarea id="letterInput" class="craving-input" rows="4" placeholder="Write a sweet letter or a long message..." style="resize: vertical;"></textarea>
+        <input type="text" id="letterSender" class="craving-input" placeholder="From (e.g. Me / Gulu)" style="margin-bottom: 10px;">
+        <button class="cute-btn" onclick="sendLetter()">Send Letter 💌</button>
+        <div id="lettersDisplay" style="margin-top: 15px;"></div>
+    </div>
+
+    <!-- Box 9: Digital Coupon Book -->
+    <div class="box">
+        <div class="info-label" style="margin-bottom: 15px; font-size: 14px; color: var(--text-dark);">🎟️ Digital Coupon Book</div>
+        <div id="couponsDisplay"></div>
     </div>
 
     <!-- FULL MAP / DATE PICKER MODAL -->
@@ -169,6 +337,13 @@
             <div id="modalInstructions" style="font-size: 12px; color: #888; margin-bottom: 15px; display: none;">
                 Tap the exact day her period started to update it:
             </div>
+            
+            <div class="month-nav">
+                <button class="nav-btn" onclick="changeMonth(-1)">‹</button>
+                <span id="monthLabel" style="color: var(--text-dark); font-weight: bold; font-size: 16px;"></span>
+                <button class="nav-btn" onclick="changeMonth(1)">›</button>
+            </div>
+
             <div class="calendar-grid" id="fullCalendarGrid"></div>
         </div>
     </div>
@@ -177,8 +352,20 @@
         const cycleLength = 26;
         const periodDuration = 7;
         
-        // 🔴 FIREBASE URL INTEGRATED HERE
+        // 🔴 FIREBASE URLs
         const FIREBASE_URL = "https://gulu100103-default-rtdb.asia-southeast1.firebasedatabase.app/lastDate.json";
+        const CRAVING_FIREBASE_URL = "https://gulu100103-default-rtdb.asia-southeast1.firebasedatabase.app/craving.json";
+        const MOOD_FIREBASE_URL = "https://gulu100103-default-rtdb.asia-southeast1.firebasedatabase.app/mood.json";
+        const LETTERS_FIREBASE_URL = "https://gulu100103-default-rtdb.asia-southeast1.firebasedatabase.app/letters.json";
+        const COUPONS_FIREBASE_URL = "https://gulu100103-default-rtdb.asia-southeast1.firebasedatabase.app/coupons.json";
+
+        const couponsList = [
+            "💆‍♀️ 1 Free Back Massage",
+            "🍿 You pick the movie tonight",
+            "🥞 Breakfast in bed",
+            "🫂 1 Hour of Pure Cuddling",
+            "🧹 Chores done by me today"
+        ];
 
         const notes = [
             "You are my favorite notification. Have a beautiful day, Gulu! 💕",
@@ -215,6 +402,20 @@
         ];
 
         let lastPeriodDate = new Date('2026-07-06');
+        let viewYear = new Date().getFullYear();
+        let viewMonth = new Date().getMonth();
+        let isDatePicker = false;
+
+        // Date you two started dating: July 21, 2025 at 4:30 PM
+        const togetherStartDate = new Date('2025-07-21T16:30:00');
+
+        function getDynamicGreeting() {
+            const h = new Date().getHours();
+            if (h >= 5 && h < 12) return "Good morning, my sunshine Gulu! ☀️";
+            if (h >= 12 && h < 17) return "Having a good day, Gulu? 🌸";
+            if (h >= 17 && h < 21) return "Good evening, beautiful Gulu. 🌙";
+            return "Sleep well, my love Gulu. Sweet dreams. 🌌";
+        }
 
         function getDayStatus(dateToCheck) {
             const date = new Date(dateToCheck);
@@ -229,11 +430,17 @@
             if (dayOfCycle < 0) dayOfCycle += cycleLength;
 
             if (dayOfCycle >= 0 && dayOfCycle < periodDuration) return 'period';
-            if (dayOfCycle === 14) return 'ovulation';
-            return 'normal';
+            if (dayOfCycle >= 11 && dayOfCycle <= 18) return 'ovulation';
+            return 'safe'; 
         }
 
         async function init() {
+            // Set dynamic greeting immediately
+            document.getElementById('dynamicGreeting').innerText = getDynamicGreeting();
+            setInterval(() => {
+                document.getElementById('dynamicGreeting').innerText = getDynamicGreeting();
+            }, 60000); // update greeting every minute in case time changes
+
             document.getElementById('dailyNote').innerText = notes[new Date().getDate() - 1];
             document.getElementById('syncStatus').innerText = "☁️ Syncing data...";
             
@@ -241,11 +448,45 @@
             
             updateDisplay();
             document.getElementById('syncStatus').innerText = "☁️ Up to date";
+
+            // Start live timers
+            updateTogetherCounter();
+            setInterval(updateTogetherCounter, 1000);
+
+            // Fetch all synced data and keep checking for updates
+            fetchCraving();
+            fetchMood();
+            fetchLetters();
+            fetchCoupons();
+            
+            setInterval(fetchCraving, 5000); 
+            setInterval(fetchMood, 5000);
+            setInterval(fetchLetters, 5000);
+            setInterval(fetchCoupons, 5000);
+        }
+
+        function updateTogetherCounter() {
+            const now = new Date();
+            let diff = now - togetherStartDate;
+            
+            if (diff < 0) {
+                document.getElementById('togetherCounter').innerText = "0d 0h 0m 0s";
+                return;
+        }
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            diff -= days * (1000 * 60 * 60 * 24);
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            diff -= hours * (1000 * 60 * 60);
+            const mins = Math.floor(diff / (1000 * 60));
+            diff -= mins * (1000 * 60);
+            const secs = Math.floor(diff / 1000);
+
+            document.getElementById('togetherCounter').innerText = `${days}d ${hours}h ${mins}m ${secs}s`;
         }
 
         function updateDisplay() {
             renderScrollableMap();
-            updateCountdown();
+            updateDashboard();
         }
 
         function renderScrollableMap() {
@@ -279,29 +520,42 @@
             }, 100);
         }
 
+        function changeMonth(dir) {
+            viewMonth += dir;
+            if (viewMonth < 0) { viewMonth = 11; viewYear--; }
+            if (viewMonth > 11) { viewMonth = 0; viewYear++; }
+            renderFullCalendar(isDatePicker);
+        }
+
         function renderFullCalendar(forDatePicking = false) {
             const grid = document.getElementById('fullCalendarGrid');
             grid.innerHTML = '';
+            
+            const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            document.getElementById('monthLabel').innerText = `${monthNames[viewMonth]} ${viewYear}`;
             
             const daysOfWeek = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
             daysOfWeek.forEach(day => {
                 grid.innerHTML += `<div class="cal-cell cal-header">${day}</div>`;
             });
 
-            const today = new Date();
-            const startRenderDate = new Date(today.getFullYear(), today.getMonth(), 1);
+            const startRenderDate = new Date(viewYear, viewMonth, 1);
             const startDay = startRenderDate.getDay();
-            startRenderDate.setDate(startRenderDate.getDate() - startDay);
+               startRenderDate.setDate(startRenderDate.getDate() - startDay);
 
             for(let i = 0; i < 42; i++) {
                 let cellDate = new Date(startRenderDate);
                 cellDate.setDate(startRenderDate.getDate() + i);
                 
-                const status = forDatePicking ? 'normal' : getDayStatus(cellDate);
+                const status = forDatePicking ? '' : getDayStatus(cellDate);
                 
                 let cell = document.createElement('div');
-                cell.className = `cal-cell ${status}`;
-                if (cellDate.getMonth() !== today.getMonth()) cell.style.opacity = '0.3';
+                let classes = `cal-cell ${status}`;
+                
+                if (cellDate.getMonth() !== viewMonth) classes += ' out-of-month';
+                
+                cell.className = classes;
+                if (cellDate.getMonth() !== viewMonth) cell.style.opacity = '0.3';
                 cell.innerText = cellDate.getDate();
 
                 if (forDatePicking) {
@@ -312,28 +566,80 @@
             }
         }
 
-        function updateCountdown() {
+        function updateDashboard() {
             const today = new Date();
             today.setHours(0,0,0,0);
-            const nextPeriod = new Date(lastPeriodDate);
-            nextPeriod.setDate(lastPeriodDate.getDate() + cycleLength);
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
             
-            const checkDate = new Date(nextPeriod);
-            checkDate.setHours(0,0,0,0);
-            const diffTime = checkDate - today;
+            let baseCycleStart = new Date(lastPeriodDate);
+            baseCycleStart.setHours(0,0,0,0);
+
+        while (baseCycleStart.getTime() + cycleLength * 86400000 <= today.getTime()) {
+                baseCycleStart.setDate(baseCycleStart.getDate() + cycleLength);
+            }
+            
+            let nextPeriodStart = new Date(baseCycleStart);
+            if (today > new Date(baseCycleStart.getTime() + (periodDuration - 1) * 86400000)) {
+                nextPeriodStart.setDate(nextPeriodStart.getDate() + cycleLength);
+            }
+            let periodEnd = new Date(nextPeriodStart);
+            periodEnd.setDate(nextPeriodStart.getDate() + periodDuration - 1);
+
+            let fertileStart = new Date(baseCycleStart);
+            fertileStart.setDate(baseCycleStart.getDate() + 11);
+            let fertileEnd = new Date(baseCycleStart);
+            fertileEnd.setDate(baseCycleStart.getDate() + 18);
+            
+            if (today > fertileEnd) {
+                fertileStart.setDate(fertileStart.getDate() + cycleLength);
+                fertileEnd.setDate(fertileEnd.getDate() + cycleLength);
+            }
+            
+            let pmsBasePeriod = new Date(nextPeriodStart);
+            if (today >= nextPeriodStart && today <= periodEnd) {
+                pmsBasePeriod.setDate(pmsBasePeriod.getDate() + cycleLength);
+            }
+            let pmsStart = new Date(pmsBasePeriod);
+            pmsStart.setDate(pmsBasePeriod.getDate() - 3);
+            let pmsEnd = new Date(pmsBasePeriod);
+            pmsEnd.setDate(pmsBasePeriod.getDate() - 1);
+
+        const formatDateRange = (d1, d2) => {
+                let txt = `${d1.getDate()}`;
+                if (d1.getMonth() !== d2.getMonth()) {
+                    txt += ` ${months[d1.getMonth()]}`;
+                }
+                txt += ` - ${d2.getDate()} ${months[d2.getMonth()]}`;
+                return txt;
+            };
+            
+            document.getElementById('nextOvulationDate').innerText = formatDateRange(fertileStart, fertileEnd);
+            document.getElementById('nextPmsDate').innerText = formatDateRange(pmsStart, pmsEnd);
+            document.getElementById('nextPeriodDate').innerText = formatDateRange(nextPeriodStart, periodEnd);
+            
+            let upcomingPeriodForCountdown = new Date(nextPeriodStart);
+            if (today >= nextPeriodStart && today <= periodEnd) {
+                upcomingPeriodForCountdown.setDate(upcomingPeriodForCountdown.getDate() + cycleLength);
+            }
+            const diffTime = upcomingPeriodForCountdown - today;
             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-            let txt = "";
-            if (diffDays > 0) txt = `⏳ ${diffDays} days left until period.`;
-            else if (diffDays <= 0 && diffDays > -periodDuration) txt = `🩸 Period active. Heating pad ready! ❤️`;
-            else txt = `⏰ It's ${Math.abs(diffDays)} days late!`;
             
+            let txt = "";
+            if (today >= nextPeriodStart && today <= periodEnd) {
+                txt = `🩸 Period active. Heating pad ready! ❤️`;
+            } else if (diffDays > 0) {
+                txt = `⏳ ${diffDays} days left until period.`;
+            } else {
+                txt = `⏰ It's ${Math.abs(diffDays)} days late!`;
+            }
             document.getElementById('countdown').innerText = txt;
-        }
-
+            }
         function openFullMap() {
             document.getElementById('modalTitle').innerText = "Cycle Map";
             document.getElementById('modalInstructions').style.display = 'none';
+            isDatePicker = false;
+            viewYear = new Date().getFullYear();
+            viewMonth = new Date().getMonth();
             renderFullCalendar(false);
             document.getElementById('mapModal').style.display = 'flex';
         }
@@ -341,6 +647,9 @@
         function openDatePicker() {
             document.getElementById('modalTitle').innerText = "Select Start Date";
             document.getElementById('modalInstructions').style.display = 'block';
+            isDatePicker = true;
+            viewYear = new Date().getFullYear();
+            viewMonth = new Date().getMonth();
             renderFullCalendar(true);
             document.getElementById('mapModal').style.display = 'flex';
         }
@@ -358,25 +667,208 @@
             let m = String(selectedDate.getMonth() + 1).padStart(2, '0');
             let d = String(selectedDate.getDate()).padStart(2, '0');
             let dateStr = `${y}-${m}-${d}`;
-            
-            await saveDateToDB(dateStr);
+
+        await saveDateToDB(dateStr);
             alert("New date saved globally! Gulu's phone will update automatically too. ❤️");
+        }
+
+        // --- CRAVINGS LOGIC ---
+        async function fetchCraving() {
+            try {
+                let res = await fetch(CRAVING_FIREBASE_URL);
+                let text = await res.json();
+                if (text) {
+                    document.getElementById('cravingDisplay').innerText = `🧁 Current craving: "${text}"`;
+                } else {
+                    document.getElementById('cravingDisplay').innerText = "No cravings logged yet.";
+                }
+            } catch(e) { console.error("Craving Fetch Error:", e); }
+        }
+
+        async function saveCraving() {
+            const input = document.getElementById('cravingInput');
+            const text = input.value.trim();
+            if (!text) {
+                alert("Please type what you are craving first! 🍫");
+                return;
+            }
+            
+            try {
+                await fetch(CRAVING_FIREBASE_URL, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(text)
+                });
+                input.value = "";
+                fetchCraving(); 
+                alert("Craving saved! He will see it soon. ❤️");
+            } catch(e) { 
+            console.error("Craving Save Error:", e);
+                alert("Failed to save. Check connection.");
+            }
+        }
+
+        // --- MOOD LOGIC ---
+        async function fetchMood() {
+            try {
+                let res = await fetch(MOOD_FIREBASE_URL);
+                let text = await res.json();
+                if (text) {
+                    document.getElementById('moodDisplay').innerText = `Current mood: ${text}`;
+                } else {
+                    document.getElementById('moodDisplay').innerText = "Haven't checked in yet today.";
+                }
+            } catch(e) { console.error("Mood Fetch Error:", e); }
+        }
+
+        async function saveMood(moodText) {
+            try {
+                await fetch(MOOD_FIREBASE_URL, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(moodText)
+                });
+                fetchMood(); 
+            } catch(e) { 
+                console.error("Mood Save Error:", e);
+                alert("Failed to save mood. Check connection.");
+            }
+        }
+
+        // --- LETTERS LOGIC ---
+        async function fetchLetters() {
+            try {
+                let res = await fetch(LETTERS_FIREBASE_URL);
+                let letters = await res.json();
+                const display = document.getElementById('lettersDisplay');
+                
+                if (letters && Array.isArray(letters) && letters.length > 0) {
+                    let html = '';
+                    // Show most recent first (limit to 5 to save space)
+                    for(let i = letters.length - 1; i >= Math.max(0, letters.length - 5); i--) {
+                        let l = letters[i];
+                        html += `<div class="letter-item">
+                            <span class="sender">From: ${l.sender}</span>
+                            <div class="text">${l.text}</div>
+                        </div>`;
+                    }
+                    display.innerHTML = html;
+                } else {
+                    display.innerHTML = `<div class="display-box" style="text-align: center;">No letters yet. Write the first one! 💌</div>`;
+                }
+            } catch(e) { console.error("Letters Fetch Error:", e); }
+        }
+
+        async function sendLetter() {
+            const text = document.getElementById('letterInput').value.trim();
+            const sender = document.getElementById('letterSender').value.trim() || 'Unknown';
+            if (!text) {
+                alert("Letter is empty! Write something sweet. 💌");
+                return;
+            }
+            let currentLetters = [];
+            try {
+                let res = await fetch(LETTERS_FIREBASE_URL);
+                let data = await res.json();
+                if (data && Array.isArray(data)) currentLetters = data;
+            } catch(e){}
+            
+            currentLetters.push({ sender, text, time: Date.now() });
+            // Keep only the last 20 letters to prevent database bloat
+            if (currentLetters.length > 20) currentLetters = currentLetters.slice(currentLetters.length - 20);
+            
+            try {
+                await fetch(LETTERS_FIREBASE_URL, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(currentLetters)
+                });
+                document.getElementById('letterInput').value = "";
+                fetchLetters(); 
+                alert("Letter sent! 💌");
+            } catch(e) { 
+                console.error("Letter Save Error:", e);
+                alert("Failed to send letter. Check connection.");
+            }
+        }
+
+        // --- COUPONS LOGIC ---
+        async function fetchCoupons() {
+            try {
+                let res = await fetch(COUPONS_FIREBASE_URL);
+                let states = await res.json();
+                if (!states) states = {};
+                
+                let html = '';
+                couponsList.forEach((c, i) => {
+                    let redeemed = states[i] === true;
+                    html += `
+                        <div class="coupon-item ${redeemed ? 'redeemed' : ''}">
+                            <span class="coupon-text">${c}</span>
+                            ${redeemed ? 
+                                `<button class="coupon-btn reset" onclick="resetCoupon(${i})">Mark Done ✅</button>` : 
+                                `<button class="coupon-btn" onclick="redeemCoupon(${i})">Redeem</button>`
+                            }
+                        </div>
+                    `;
+                });
+                document.getElementById('couponsDisplay').innerHTML = html;
+            } catch(e) { console.error("Coupons Fetch Error:", e); }
+        }
+
+        async function redeemCoupon(index) {
+            let states = {};
+            try {
+                let res = await fetch(COUPONS_FIREBASE_URL);
+                states = await res.json() || {};
+            } catch(e){}
+            states[index] = true;
+            
+            try {
+                await fetch(COUPONS_FIREBASE_URL, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(states)
+                });
+                fetchCoupons(); 
+            } catch(e) { 
+                console.error("Coupon Redeem Error:", e);
+                alert("Failed to redeem. Check connection.");
+            }
+        }
+
+        async function resetCoupon(index) {
+            let states = {};
+            try {
+                let res = await fetch(COUPONS_FIREBASE_URL);
+                states = await res.json() || {};
+            } catch(e){}
+            states[index] = false;
+            
+            try {
+                await fetch(COUPONS_FIREBASE_URL, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(states)
+                });
+                fetchCoupons(); 
+            } catch(e) { 
+                console.error("Coupon Reset Error:", e);
+            }
         }
 
         // --- DATABASE FETCH & SAVE ---
         async function fetchDateFromDB() {
-            // Check if FIREBASE_URL has been modified from the placeholder
-            if (FIREBASE_URL.includes("PASTE_YOUR") === false) {
-                try {
-                    let res = await fetch(FIREBASE_URL);
-                    let dateStr = await res.json();
+            try {
+                let res = await fetch(FIREBASE_URL);
+                let dateStr = await res.json();
+                if (dateStr) {
                     if (dateStr) {
-                        let [y, m, d] = dateStr.split('-');
-                        return new Date(y, m - 1, d);
-                    }
-                } catch(e) { console.error("Firebase Fetch Error:", e); }
-            }
-            // Fallback to local storage if Firebase fails or is empty
+                    let [y, m, d] = dateStr.split('-');
+                    return new Date(y, m - 1, d);
+                }
+            } catch(e) { console.error("Firebase Fetch Error:", e); }
+            
             let loc = localStorage.getItem('guluDateStr');
             if (loc) {
                 let [y, m, d] = loc.split('-');
@@ -387,15 +879,13 @@
 
         async function saveDateToDB(dateStr) {
             localStorage.setItem('guluDateStr', dateStr);
-            if (FIREBASE_URL.includes("PASTE_YOUR") === false) {
-                try {
-                    await fetch(FIREBASE_URL, {
-                        method: 'PUT',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(dateStr)
-                    });
-                } catch(e) { console.error("Firebase Save Error:", e); }
-            }
+            try {
+                await fetch(FIREBASE_URL, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(dateStr)
+                });
+            } catch(e) { console.error("Firebase Save Error:", e); }
         }
 
         window.onload = init;
