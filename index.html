@@ -19,22 +19,42 @@
             min-height: 100vh;
             margin: 0;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
             color: var(--text-dark);
             padding: 20px;
             box-sizing: border-box;
+            gap: 15px; /* Spacing between boxes */
         }
-        .dashboard {
+
+        /* The Separate Box Design */
+        .box {
             background: rgba(255, 255, 255, 0.98);
-            padding: 30px 20px;
-            border-radius: 30px;
-            box-shadow: 0 20px 40px rgba(255, 143, 163, 0.2);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(255, 143, 163, 0.15);
             max-width: 450px;
             width: 100%;
+            box-sizing: border-box;
             text-align: center;
-            border: 3px solid var(--pink-light);
         }
+
+        /* Specific Box Styles */
+        .box-header {
+            border-bottom: 4px solid var(--pink-main);
+        }
+        .box-note {
+            background: var(--pink-bg);
+            border: 2px solid var(--pink-light);
+            font-size: 16px;
+            font-style: italic;
+            color: #800f2f;
+            line-height: 1.4;
+        }
+        .box-calendar {
+            padding: 15px 10px;
+        }
+        
         h1 {
             color: var(--pink-main);
             font-size: 26px;
@@ -43,38 +63,20 @@
         .subtitle {
             font-size: 14px;
             color: #888;
-            margin-bottom: 20px;
-        }
-        
-        /* Daily Note */
-        .daily-note {
-            background: var(--pink-bg);
-            padding: 15px;
-            border-radius: 20px;
-            font-size: 16px;
-            font-style: italic;
-            margin-bottom: 25px;
-            color: #800f2f;
-            line-height: 1.4;
-            box-shadow: inset 0 2px 10px rgba(255, 77, 109, 0.1);
         }
 
-        /* Phase Summary Card */
-        .summary-card {
-            background: #f8f9fa;
-            border-radius: 20px;
-            padding: 15px;
+        /* Phase Summary */
+        .summary-container {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-            border: 1px solid #eee;
+            gap: 10px;
         }
         .summary-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 30%;
+            flex: 1;
+            background: #f8f9fa;
+            padding: 10px 5px;
+            border-radius: 15px;
+            border: 1px solid #eee;
         }
         .summary-title {
             font-size: 12px;
@@ -84,16 +86,15 @@
         }
         .summary-value {
             font-weight: bold;
-            font-size: 14px;
+            font-size: 13px;
             background: white;
-            padding: 8px 5px;
-            border-radius: 12px;
-            width: 100%;
+            padding: 6px 0;
+            border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.02);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 5px;
+            gap: 4px;
         }
         .val-ovulation { color: var(--green-main); }
         .val-pms { color: var(--grey-main); }
@@ -103,10 +104,6 @@
         .week-container {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 25px;
-            padding: 10px 0;
-            border-top: 1px dashed var(--pink-light);
-            border-bottom: 1px dashed var(--pink-light);
         }
         .day-col {
             display: flex;
@@ -130,9 +127,7 @@
             justify-content: center;
             border-radius: 50%;
         }
-        .day-col.today .day-name {
-            color: var(--green-main);
-        }
+        .day-col.today .day-name { color: var(--green-main); }
         .day-col.today .day-number {
             border: 2px dashed var(--green-main);
             color: var(--green-main);
@@ -146,25 +141,13 @@
             margin-top: 2px;
             display: none;
         }
-        .day-col.today .dot {
-            display: block;
-        }
+        .day-col.today .dot { display: block; }
 
         /* Countdown & Update */
-        .countdown {
+        .countdown-text {
             font-size: 18px;
             font-weight: bold;
-            margin-bottom: 20px;
-            padding: 15px;
-            background: var(--pink-light);
-            border-radius: 15px;
             color: #800f2f;
-        }
-        .update-section {
-            background: #fff;
-            padding: 15px;
-            border-radius: 15px;
-            border: 1px solid #eee;
         }
         label {
             display: block;
@@ -180,24 +163,22 @@
             color: var(--text-dark);
             width: 60%;
             outline: none;
+            margin-bottom: 10px;
         }
         button {
             background: var(--pink-main);
             color: white;
-            padding: 10px 20px;
+            padding: 12px 20px;
             border-radius: 10px;
             border: none;
             font-weight: bold;
             cursor: pointer;
-            margin-top: 10px;
             width: 100%;
             font-size: 16px;
             transition: background 0.3s ease;
             box-shadow: 0 4px 10px rgba(255, 77, 109, 0.3);
         }
-        button:hover {
-            background: #c9184a;
-        }
+        button:hover { background: #c9184a; }
         .heart {
             color: var(--pink-main);
             animation: beat 1.5s infinite;
@@ -207,20 +188,29 @@
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.2); }
         }
+        .sync-status {
+            font-size: 11px;
+            color: #aaa;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
 
-    <div class="dashboard">
+    <!-- Box 1: Header -->
+    <div class="box box-header">
         <h1>Hi, Gulu! <span class="heart">❤️</span></h1>
         <div class="subtitle">Your personal tracker, made with love.</div>
-        
-        <div class="daily-note" id="dailyNote">
-            Loading your daily sweet note...
-        </div>
+    </div>
 
-        <!-- Phase Summary Card like IMG_20260721_194045 -->
-        <div class="summary-card">
+    <!-- Box 2: Daily Note -->
+    <div class="box box-note" id="dailyNote">
+        Loading your daily sweet note...
+    </div>
+
+    <!-- Box 3: Phase Summary -->
+    <div class="box">
+        <div class="summary-container">
             <div class="summary-item">
                 <div class="summary-title">Next<br>Ovulation</div>
                 <div class="summary-value val-ovulation">
@@ -240,28 +230,35 @@
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Weekly Calendar View like IMG_20260721_194058 -->
-        <div class="week-container" id="weekCalendar">
-            <!-- JavaScript will populate days here -->
-        </div>
+    <!-- Box 4: Weekly Map -->
+    <div class="box box-calendar">
+        <div class="week-container" id="weekCalendar"></div>
+    </div>
 
-        <!-- Countdown -->
-        <div class="countdown" id="countdown">...</div>
+    <!-- Box 5: Countdown -->
+    <div class="box">
+        <div class="countdown-text" id="countdown">Calculating...</div>
+    </div>
 
-        <!-- Update Form -->
-        <div class="update-section">
-            <label>Did your cycle start on a new day? Update here:</label>
-            <input type="date" id="lastDateInput">
-            <button onclick="updateDate()">Save New Date</button>
-        </div>
+    <!-- Box 6: Update Settings -->
+    <div class="box">
+        <label>Did your cycle start on a new day? Update here:</label>
+        <input type="date" id="lastDateInput">
+        <button onclick="updateDate()" id="saveBtn">Save New Date</button>
+        <div class="sync-status" id="syncStatus">☁️ Connected</div>
     </div>
 
     <script>
+        // --- ⚙️ SETTINGS ---
         const cycleLength = 26;
-        const periodDuration = 7; // Assuming 7 days of bleeding based on screenshot
+        const periodDuration = 7;
         
-        // 31 Sweet notes
+        // 🔴 DATABASE SETUP (Read Step 2 below to get your URL)
+        // Paste your Firebase Realtime DB URL below. Keep the "/lastDate.json" at the end!
+        const DATABASE_URL = "YOUR_FIREBASE_URL_HERE/lastDate.json";
+
         const notes = [
             "You are my favorite notification. Have a beautiful day, Gulu! 💕",
             "Just a daily reminder that you are deeply loved and cherished. 🥰",
@@ -296,46 +293,77 @@
             "You are my dream come true. Sweet dreams, my Gulu. 💭"
         ];
 
-        let lastPeriodDate = localStorage.getItem('guluLastDate') 
-            ? new Date(localStorage.getItem('guluLastDate')) 
-            : new Date('2026-07-06');
+        let lastPeriodDate = new Date('2026-07-06'); // Default backup
 
-        // Helper to format dates like "20 Jul"
+        // --- DATABASE FUNCTIONS ---
+        async function fetchDateFromDB() {
+            try {
+                if (DATABASE_URL.includes("YOUR_FIREBASE_URL_HERE")) throw new Error("No DB Configured");
+                let response = await fetch(DATABASE_URL);
+                let dateStr = await response.json();
+                if (dateStr) {
+                    let [y, m, d] = dateStr.split('-');
+                    return new Date(y, m - 1, d);
+                }
+            } catch (error) {
+                console.log("Using Local Storage");
+            }
+            // Fallback to local storage if DB fails or isn't set up
+            let localStr = localStorage.getItem('guluDateStr');
+            if (localStr) {
+                let [y, m, d] = localStr.split('-');
+                return new Date(y, m - 1, d);
+            }
+            return lastPeriodDate;
+        }
+
+        async function saveDateToDB(dateStr) {
+            localStorage.setItem('guluDateStr', dateStr); // Save locally first for instant feedback
+            if (!DATABASE_URL.includes("YOUR_FIREBASE_URL_HERE")) {
+                try {
+                    await fetch(DATABASE_URL, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(dateStr)
+                    });
+                } catch (e) {
+                    console.error("Database save failed", e);
+                }
+            }
+        }
+
+        // --- APP LOGIC ---
         function formatDateShort(date) {
             const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
             let d = date.getDate();
-            let m = months[date.getMonth()];
-            return `${d < 10 ? '0'+d : d} ${m}`;
+            return `${d < 10 ? '0'+d : d} ${months[date.getMonth()]}`;
         }
 
-        function init() {
+        async function init() {
             const today = new Date();
             document.getElementById('dailyNote').innerText = notes[today.getDate() - 1];
+            renderWeekCalendar(today);
+            
+            document.getElementById('syncStatus').innerText = "☁️ Syncing data...";
+            lastPeriodDate = await fetchDateFromDB();
             updateDisplay();
-            renderWeekCalendar();
+            document.getElementById('syncStatus').innerText = "☁️ Up to date";
         }
 
-        function renderWeekCalendar() {
+        function renderWeekCalendar(today) {
             const calendarEl = document.getElementById('weekCalendar');
             calendarEl.innerHTML = '';
-            
-            const today = new Date();
             const daysOfWeek = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
-
-            // Find the Monday of the current week (or adjust to show past 3 & next 3 days)
-            // Let's just center on today to make it easy and always relevant!
             let startDay = new Date(today);
             startDay.setDate(today.getDate() - 3);
 
             for(let i = 0; i < 7; i++) {
                 let currentDay = new Date(startDay);
                 currentDay.setDate(startDay.getDate() + i);
-                
                 let isToday = (currentDay.getDate() === today.getDate() && currentDay.getMonth() === today.getMonth());
                 
                 let col = document.createElement('div');
                 col.className = 'day-col' + (isToday ? ' today' : '');
-                
                 col.innerHTML = `
                     <div class="day-name">${daysOfWeek[currentDay.getDay()]}</div>
                     <div class="dot"></div>
@@ -349,7 +377,6 @@
             const today = new Date();
             today.setHours(0,0,0,0);
 
-            // Phase Calculations
             const nextPeriod = new Date(lastPeriodDate);
             nextPeriod.setDate(lastPeriodDate.getDate() + cycleLength);
             
@@ -364,12 +391,10 @@
             const pmsEnd = new Date(nextPeriod);
             pmsEnd.setDate(nextPeriod.getDate() - 1);
 
-            // Update Summary Cards
             document.getElementById('lbl-ovu').innerText = formatDateShort(ovulation);
             document.getElementById('lbl-pms').innerText = `${pmsStart.getDate()}-${formatDateShort(pmsEnd)}`;
             document.getElementById('lbl-per').innerText = `${nextPeriod.getDate() < 10 ? '0'+nextPeriod.getDate() : nextPeriod.getDate()}-${formatDateShort(periodEnd)}`;
 
-            // Countdown Logic
             const checkDate = new Date(nextPeriod);
             checkDate.setHours(0,0,0,0);
             const diffTime = checkDate - today;
@@ -385,22 +410,31 @@
             }
             document.getElementById('countdown').innerText = countdownText;
             
-            // Set input to current saved date
-            const localFormat = new Date(lastPeriodDate.getTime() - (lastPeriodDate.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
-            document.getElementById('lastDateInput').value = localFormat;
+            // Format for HTML date input: YYYY-MM-DD
+            let y = lastPeriodDate.getFullYear();
+            let m = String(lastPeriodDate.getMonth() + 1).padStart(2, '0');
+            let d = String(lastPeriodDate.getDate()).padStart(2, '0');
+            document.getElementById('lastDateInput').value = `${y}-${m}-${d}`;
         }
 
-        function updateDate() {
-            const inputVal = document.getElementById('lastDateInput').value;
+        async function updateDate() {
+            const inputVal = document.getElementById('lastDateInput').value; // Format: YYYY-MM-DD
             if (inputVal) {
-                lastPeriodDate = new Date(inputVal);
-                localStorage.setItem('guluLastDate', lastPeriodDate.toISOString());
+                let btn = document.getElementById('saveBtn');
+                btn.innerText = "Saving...";
+                
+                let [y, m, d] = inputVal.split('-');
+                lastPeriodDate = new Date(y, m - 1, d); // Safe timezone parsing
+                
+                await saveDateToDB(inputVal);
                 updateDisplay();
-                alert("Date saved successfully! Dashboard updated. ❤️");
+                
+                btn.innerText = "Save New Date";
+                alert("Date saved globally! It will now update on Gulu's phone too. ❤️");
             }
         }
 
         window.onload = init;
     </script>
 </body>
-  </html>
+</html>
