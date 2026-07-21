@@ -858,21 +858,23 @@
         }
 
         // --- DATABASE FETCH & SAVE ---
+
+
         async function fetchDateFromDB() {
             try {
                 let res = await fetch(FIREBASE_URL);
                 let dateStr = await res.json();
                 if (dateStr) {
-                    if (dateStr) {
-                    let [y, m, d] = dateStr.split('-');
-                    return new Date(y, m - 1, d);
+                    let parts = dateStr.split('-');
+                    return new Date(parts[0], parts[1] - 1, parts[2]);
                 }
-            } catch(e) { console.error("Firebase Fetch Error:", e); }
-            
+            } catch(e) {
+                console.error("Firebase Fetch Error:", e);
+            }
             let loc = localStorage.getItem('guluDateStr');
             if (loc) {
-                let [y, m, d] = loc.split('-');
-                return new Date(y, m - 1, d);
+                let parts = loc.split('-');
+                return new Date(parts[0], parts[1] - 1, parts[2]);
             }
             return lastPeriodDate;
         }
@@ -885,7 +887,9 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(dateStr)
                 });
-            } catch(e) { console.error("Firebase Save Error:", e); }
+            } catch(e) {
+                console.error("Firebase Save Error:", e);
+            }
         }
 
         window.onload = init;
