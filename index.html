@@ -3,30 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- HOME SCREEN APP NAME & ICON -->
     <title>Love</title>
     <meta name="apple-mobile-web-app-title" content="Love">
     <meta name="application-name" content="Love">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="theme-color" content="#ff4d6d">
-    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23ff4d6d' rx='22'/><path transform='scale(3.5) translate(8, 8)' d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z' fill='white'/></svg>">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23ff4d6d' rx='22'/><path transform='scale(3.5) translate(8, 8)' d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z' fill='white'/></svg>">
-
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23ff4d6d' rx='22' ry='22'/><g transform='translate(8,8) scale(3.5)'><path d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z' fill='white'/></g></svg>">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23ff4d6d' rx='22' ry='22'/><g transform='translate(8,8) scale(3.5)'><path d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z' fill='white'/></g></svg>">
     <style>
-        /* SMOOTH SCROLLING FOR WHOLE SITE */
         html { scroll-behavior: smooth; }
-        
-        :root {
-            --pink-main: #ff4d6d; --pink-light: #ffccd5; --pink-bg: #fff0f3;
-            --green-main: #8db600; --green-light: #e6ffb3;
-            --blue-main: #4fc3f7; --blue-light: #e1f5fe; --text-dark: #5a3a45;
-        }
+        :root { --pink-main: #ff4d6d; --pink-light: #ffccd5; --pink-bg: #fff0f3; --green-main: #8db600; --green-light: #e6ffb3; --blue-main: #4fc3f7; --blue-light: #e1f5fe; --text-dark: #5a3a45; }
         body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(135deg, #ffe6ea 0%, #fdfbfb 100%); min-height: 100vh; margin: 0; display: flex; flex-direction: column; align-items: center; color: var(--text-dark); padding: 15px; box-sizing: border-box; gap: 12px; -webkit-overflow-scrolling: touch; }
         .box { background: rgba(255, 255, 255, 0.98); padding: 15px; border-radius: 20px; box-shadow: 0 5px 15px rgba(255, 143, 163, 0.15); max-width: 420px; width: 100%; box-sizing: border-box; text-align: center; position: relative; }
-        
-        /* INTRO LOADER */
         #intro-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at center, #ff4d6d 0%, #c81d4e 100%); z-index: 99999; display: flex; justify-content: center; align-items: center; flex-direction: column; overflow: hidden; transition: opacity 0.8s ease, transform 0.8s ease; }
         #intro-heart { width: 50px; height: 50px; fill: #ffccd5; filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.6)); transform: translateZ(0) scale(0); z-index: 2; will-change: transform; }
         #intro-content { display: flex; flex-direction: column; align-items: center; z-index: 3; width: 100%; padding: 0 40px; box-sizing: border-box; position: absolute; }
@@ -35,8 +24,6 @@
         #intro-percentage { font-family: 'Courier New', monospace; color: #fff; font-size: 56px; font-weight: bold; text-shadow: 0 0 15px rgba(255,255,255,0.7); }
         .progress-track { width: 240px; max-width: 80%; height: 4px; background: rgba(255,255,255,0.2); border-radius: 2px; margin-top: 25px; overflow: hidden; box-shadow: 0 0 8px rgba(255,255,255,0.3); }
         #progress-fill { height: 100%; width: 0%; background: #fff; box-shadow: 0 0 10px #fff; transition: width 0.1s linear; }
-
-        /* PASSCODE LOCK SCREEN */
         #pin-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(255, 230, 234, 0.95); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); z-index: 99998; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.5s ease; }
         #pin-overlay.hidden { opacity: 0; pointer-events: none; }
         .pin-lock-icon { font-size: 40px; margin-bottom: 10px; }
@@ -50,41 +37,25 @@
         .pin-btn.action { background: transparent; border: none; box-shadow: none; color: #888; font-size: 16px; }
         .shake { animation: shake 0.4s; }
         @keyframes shake { 0%, 100% { transform: translateX(0); } 20%, 60% { transform: translateX(-10px); } 40%, 80% { transform: translateX(10px); } }
-
-        /* HEADER NOTE & SONG CONTAINER (Top Center of Site) */
         #musicNoteContainer { display: none; flex-direction: column; align-items: center; position: relative; z-index: 20; margin-bottom: 12px; width: 100%; }
-        .music-note-bubble {
-            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
-            padding: 8px 15px; border-radius: 20px; box-shadow: 0 2px 8px rgba(255, 77, 109, 0.2);
-            border: 2px solid var(--pink-light); cursor: pointer; display: flex; align-items: center; gap: 8px;
-            font-size: 13px; font-weight: bold; color: var(--pink-main); transition: transform 0.2s ease; max-width: 90%;
-        }
+        .music-note-bubble { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); padding: 8px 15px; border-radius: 20px; box-shadow: 0 2px 8px rgba(255, 77, 109, 0.2); border: 2px solid var(--pink-light); cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: bold; color: var(--pink-main); transition: transform 0.2s ease; max-width: 90%; }
         .music-note-bubble:hover { transform: scale(1.05); }
         .music-note-avatar { width: 24px; height: 24px; border-radius: 50%; background: var(--pink-main); color: white; display: flex; justify-content: center; align-items: center; font-size: 12px; flex-shrink: 0; }
-        
         .music-note-player { background: white; padding: 0; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border: 2px solid var(--pink-light); width: 300px; max-width: 85vw; display: none; position: absolute; top: 100%; left: 50%; margin-top: 10px; transform: translateX(-50%) translateY(-10px); opacity: 0; transition: all 0.3s ease; overflow: hidden; z-index: 30; }
         .music-note-player.active { display: block; transform: translateX(-50%) translateY(0); opacity: 1; }
         .player-content { padding: 15px; position: relative; }
-        
         .player-controls { position: absolute; top: 5px; width: 100%; left: 0; display: flex; justify-content: space-between; padding: 0 10px; box-sizing: border-box; pointer-events: none; }
         .edit-note-btn, .close-note-btn { background: white; color: #888; border: 1px solid #eee; width: 26px; height: 26px; border-radius: 50%; cursor: pointer; font-weight: bold; display: flex; align-items: center; justify-content: center; font-size: 12px; z-index: 2; pointer-events: auto; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: all 0.2s; }
         .edit-note-btn:hover, .close-note-btn:hover { background: var(--pink-main); color: white; border-color: var(--pink-main); }
-        
         .note-text-display { font-size: 15px; font-weight: bold; color: var(--text-dark); margin-bottom: 12px; margin-top: 15px; text-align: center; font-style: italic; }
-        
         .ig-progress-bar { height: 4px; background: var(--pink-bg); width: 100%; }
         .ig-progress-fill { height: 100%; width: 0%; background: var(--pink-main); border-radius: 0 0 15px 15px; }
-
-        /* Diagonal Frosted Glass Pink Heart Bubbles */
         .heart-bubble { position: fixed; left: 0; bottom: 0; z-index: 10000; pointer-events: none; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); animation: floatDiagonal 1.8s ease-out forwards; }
         .heart-bubble svg { width: 100%; height: 100%; filter: drop-shadow(0 0 5px rgba(255, 143, 163, 0.6)); }
         @keyframes floatDiagonal { 0% { opacity: 0; transform: translate(0, 0) scale(0.5); } 15% { opacity: 1; } 100% { opacity: 0; transform: translate(100vw, -100vh) scale(4); } }
-
         h1 { color: var(--pink-main); font-size: 24px; margin: 0 0 3px 0; }
         .subtitle { font-size: 12px; color: #888; min-height: 18px; margin-bottom: 8px; }
         .together-time { font-size: 14px; font-weight: bold; color: var(--pink-main); font-family: 'Courier New', monospace; background: var(--pink-bg); padding: 6px 12px; border-radius: 20px; display: inline-block; box-shadow: 0 2px 5px rgba(255, 77, 109, 0.1); }
-        
-        /* Dual Polaroid Styling */
         .polaroid-box { padding: 15px 10px; }
         .polaroid-pair { display: flex; justify-content: center; align-items: center; gap: 15px; width: 100%; }
         .polaroid-frame { background: white; padding: 8px 8px 20px 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.15); border-radius: 4px; display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 0; max-width: 170px; }
@@ -96,14 +67,10 @@
         .upload-label { margin-top: 8px; background: var(--pink-light); color: var(--pink-main); padding: 4px 8px; border-radius: 10px; font-size: 11px; cursor: pointer; border: 1px solid var(--pink-main); transition: all 0.2s; width: fit-content; }
         .upload-label:hover { background: var(--pink-main); color: white; }
         .upload-input { display: none; }
-
         .box-note { background: var(--pink-bg); border: 2px solid var(--pink-light); font-size: 14px; font-style: italic; color: #800f2f; line-height: 1.4; }
-        
-        /* Scratch Card Styling */
         .scratch-container { position: relative; width: 100%; height: 100px; border-radius: 15px; overflow: hidden; border: 2px dashed var(--pink-main); background: var(--pink-bg); margin: 0 auto; }
         .scratch-prize { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: var(--pink-main); font-size: 18px; text-align: center; padding: 0 20px; box-sizing: border-box; z-index: 1; }
         .scratch-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer; touch-action: none; z-index: 2; }
-
         .box-calendar { padding: 10px 5px; }
         .scrollable-map { display: flex; overflow-x: auto; gap: 8px; padding: 5px; scroll-behavior: smooth; -ms-overflow-style: none; scrollbar-width: none; }
         .scrollable-map::-webkit-scrollbar { display: none; }
@@ -116,7 +83,6 @@
         .day-card .day-num { font-size: 16px; font-weight: bold; }
         .day-card.no-left-radius { border-top-left-radius: 0; border-bottom-left-radius: 0; margin-left: -8px; padding-left: 8px; z-index: 2; }
         .day-card.no-right-radius { border-top-right-radius: 0; border-bottom-right-radius: 0; margin-right: -8px; padding-right: 8px; z-index: 2; }
-
         .tap-hint { font-size: 10px; color: #aaa; margin-top: 5px; }
         .dashboard-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
         .info-card { background: #fff; border-radius: 15px; padding: 10px 5px; display: flex; flex-direction: column; align-items: center; border: 2px solid #f0f0f0; }
@@ -128,50 +94,40 @@
         .info-date { font-size: 12px; font-weight: bold; color: var(--text-dark); text-align: center; line-height: 1.2; }
         .ovulation-card .info-date { color: var(--green-main); }
         .period-card .info-date { color: var(--pink-main); }
-        
         .shortcut-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 5px; }
         .shortcut-card { background: var(--pink-bg); border: 2px dashed var(--pink-light); border-radius: 18px; padding: 15px 5px; display: flex; flex-direction: column; align-items: center; cursor: pointer; transition: all 0.3s ease; }
         .shortcut-card:hover { background: var(--pink-light); transform: translateY(-3px); box-shadow: 0 5px 10px rgba(255, 143, 163, 0.2); }
         .shortcut-icon { font-size: 32px; margin-bottom: 6px; transition: transform 0.3s; }
         .shortcut-card:hover .shortcut-icon { transform: scale(1.1) rotate(-5deg); }
         .shortcut-text { font-size: 11px; font-weight: bold; color: var(--pink-main); text-transform: uppercase; letter-spacing: 0.5px; }
-
         .mood-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin-bottom: 5px; }
         .mood-btn { background: var(--pink-light); border: 1px solid var(--pink-main); border-radius: 20px; padding: 6px 10px; font-size: 12px; font-weight: bold; cursor: pointer; color: var(--text-dark); transition: all 0.2s ease; text-align: center; }
         .mood-btn:hover { background: var(--pink-main); color: white; transform: scale(1.05); }
         .display-box { margin-top: 12px; font-size: 13px; font-weight: bold; color: #800f2f; background: var(--pink-bg); padding: 10px; border-radius: 12px; border: 1px solid var(--pink-light); text-align: center; }
-
-        /* SMOOTH MODALS */
         .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(255, 230, 234, 0.8); display: flex; justify-content: center; align-items: center; z-index: 1000; padding: 20px; backdrop-filter: blur(5px); opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
         .modal-overlay.active { opacity: 1; visibility: visible; }
         .modal-content { background: white; border-radius: 25px; padding: 25px; width: 100%; max-width: 400px; box-shadow: 0 10px 30px rgba(255, 77, 109, 0.2); max-height: 90vh; overflow-y: auto; text-align: center; border: 2px solid var(--pink-light); transform: scale(0.9); transition: transform 0.3s ease; -webkit-overflow-scrolling: touch; }
         .modal-overlay.active .modal-content { transform: scale(1); }
-        
         .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 2px dashed var(--pink-light); padding-bottom: 10px; }
         .modal-title { color: var(--pink-main); margin: 0; font-size: 22px; font-weight: bold; }
         .close-btn { background: var(--pink-bg); border: 2px solid var(--pink-light); width: 34px; height: 34px; border-radius: 50%; cursor: pointer; font-size: 20px; color: var(--pink-main); font-weight: bold; display: flex; align-items: center; justify-content: center; line-height: 0; transition: all 0.2s; }
         .close-btn:hover { background: var(--pink-main); color: white; transform: rotate(90deg); }
-
         .cute-input { width: 100%; padding: 12px; border-radius: 15px; border: 2px dashed var(--pink-main); margin-bottom: 10px; font-size: 14px; box-sizing: border-box; font-family: inherit; color: var(--text-dark); background: var(--pink-bg); }
         .cute-input:focus { outline: none; border-style: solid; background: white; }
         .cute-btn { background: var(--pink-light); color: var(--text-dark); padding: 12px 20px; border-radius: 15px; border: 2px dashed var(--pink-main); font-weight: bold; cursor: pointer; width: 100%; font-size: 16px; transition: all 0.3s ease; }
         .cute-btn:hover { background: var(--pink-main); color: white; border-style: solid; }
         .info-label-header { font-size: 12px; color: var(--text-dark); text-transform: uppercase; font-weight: bold; margin-bottom: 8px; letter-spacing: 1px; text-align: center; }
-        
         .song-config-row { display: flex; gap: 10px; margin-bottom: 10px; }
         .song-config-row .cute-input { margin-bottom: 0; }
-
         .letter-item { margin-top: 10px; background: var(--pink-bg); border-left: 4px solid var(--pink-main); padding: 12px; border-radius: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); text-align: left; }
         .letter-item .sender { font-size: 11px; color: var(--pink-main); font-weight: bold; margin-bottom: 4px; display: block; }
         .letter-item .text { font-size: 13px; color: var(--text-dark); white-space: pre-wrap; }
-
         .coupon-item { display: flex; justify-content: space-between; align-items: center; border: 2px dashed var(--pink-main); border-radius: 15px; padding: 12px; margin-bottom: 10px; background: var(--pink-bg); }
         .coupon-item.redeemed { background: #f0f0f0; border-color: #ccc; opacity: 0.7; }
         .coupon-text { font-size: 13px; font-weight: bold; color: #800f2f; text-align: left; flex: 1; padding-right: 10px; }
         .coupon-item.redeemed .coupon-text { color: #888; text-decoration: line-through; }
         .coupon-btn { background: var(--pink-main); color: white; border: none; padding: 8px 12px; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 12px; }
         .coupon-btn.reset { background: var(--green-main); }
-
         .month-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
         .nav-btn { background: var(--pink-bg); border: 2px solid var(--pink-light); width: 34px; height: 34px; border-radius: 50%; cursor: pointer; font-size: 20px; color: var(--pink-main); font-weight: bold; display: flex; align-items: center; justify-content: center; line-height: 0; }
         .nav-btn:hover { background: var(--pink-light); }
@@ -185,252 +141,28 @@
         .cal-cell:hover { background: #f0f0f0; }
         .cal-cell.no-left-radius { border-top-left-radius: 0; border-bottom-left-radius: 0; margin-left: -6px; padding-left: 6px; }
         .cal-cell.no-right-radius { border-top-right-radius: 0; border-bottom-right-radius: 0; margin-right: -6px; padding-right: 6px; }
-        
         .sync-status { font-size: 10px; color: #aaa; margin-top: 8px; }
     </style>
 </head>
 <body>
-
-    <!-- INTRO LOADER -->
-    <div id="intro-overlay">
-        <svg id="intro-heart" viewBox="0 0 24 24">
-            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-        </svg>
-        <div id="intro-content">
-            <div id="intro-love">Syncing Hearts</div>
-            <div id="intro-percentage">0%</div>
-            <div class="progress-track"><div id="progress-fill"></div></div>
-        </div>
-    </div>
-
-    <!-- PASSCODE LOCK SCREEN -->
-    <div id="pin-overlay" class="hidden">
-        <div class="pin-lock-icon">🔒</div>
-        <div class="pin-title">Enter Passcode</div>
-        <div class="pin-dots">
-            <div class="pin-dot" id="dot1"></div>
-            <div class="pin-dot" id="dot2"></div>
-            <div class="pin-dot" id="dot3"></div>
-            <div class="pin-dot" id="dot4"></div>
-        </div>
-        <div class="pin-pad" id="pin-pad">
-            <button class="pin-btn" onclick="handlePinInput('1')">1</button>
-            <button class="pin-btn" onclick="handlePinInput('2')">2</button>
-            <button class="pin-btn" onclick="handlePinInput('3')">3</button>
-            <button class="pin-btn" onclick="handlePinInput('4')">4</button>
-            <button class="pin-btn" onclick="handlePinInput('5')">5</button>
-            <button class="pin-btn" onclick="handlePinInput('6')">6</button>
-            <button class="pin-btn" onclick="handlePinInput('7')">7</button>
-            <button class="pin-btn" onclick="handlePinInput('8')">8</button>
-            <button class="pin-btn" onclick="handlePinInput('9')">9</button>
-            <button class="pin-btn action"></button>
-            <button class="pin-btn" onclick="handlePinInput('0')">0</button>
-            <button class="pin-btn action" onclick="deletePin()">⌫</button>
-        </div>
-    </div>
-
-    <!-- FLOATING INSTAGRAM NOTE MUSIC PLAYER (Top Center) -->
-    <div id="musicNoteContainer">
-        <div id="musicNotePlayer" class="music-note-player">
-            <div class="player-content">
-                <div class="player-controls">
-                    <button class="edit-note-btn" onclick="openModal('noteModal')">📝</button>
-                    <button class="close-note-btn" onclick="toggleMusicPlayer()">×</button>
-                </div>
-                <div id="noteTextDisplay" class="note-text-display"></div>
-                <div id="mediaContainer" style="width: 100%; height: 152px; display: flex; justify-content: center; align-items: center; border-radius: 12px; overflow: hidden; background: #f0f0f0;"></div>
-                <button id="ytFallbackBtn" onclick="window.open(this.getAttribute('data-href'), '_blank')" style="display:none; margin-top:12px; background:var(--pink-main); color:white; padding:10px 20px; border:none; border-radius:15px; font-weight:bold; cursor:pointer; width:100%;">🎵 Video blocked? Tap here to open in YouTube</button>
-            </div>
-            <div class="ig-progress-bar"><div id="igProgressFill" class="ig-progress-fill"></div></div>
-        </div>
-        <div class="music-note-bubble" onclick="toggleMusicPlayer()">
-            <div class="music-note-avatar">❤️</div>
-            <span>Our Note</span>
-        </div>
-    </div>
-
-    <!-- 1. Header & Together Time -->
-    <div class="box" style="border-bottom: 4px solid var(--pink-main);">
-        <h1>Hi, Gulu! ❤️</h1>
-        <div class="subtitle" id="dynamicGreeting">Loading greeting...</div>
-        <div class="together-time" id="togetherCounter">0d 0h 0m 0s</div>
-    </div>
-
-    <!-- 2. Daily Dual Polaroids -->
-    <div class="box polaroid-box">
-        <div class="polaroid-pair">
-            <div class="polaroid-frame">
-                <div class="polaroid-img-container" id="nikkiImgContainer">Waiting for Nikki's photo...</div>
-                <div class="polaroid-caption">Nikki ❤️</div>
-                <label class="upload-label">📤 Upload<input type="file" id="nikkiUpload" class="upload-input" accept="image/*"></label>
-            </div>
-            <div class="polaroid-frame">
-                <div class="polaroid-img-container" id="guluImgContainer">Waiting for Gulu's photo...</div>
-                <div class="polaroid-caption">Gulu ❤️</div>
-                <label class="upload-label">📤 Upload<input type="file" id="guluUpload" class="upload-input" accept="image/*"></label>
-            </div>
-        </div>
-    </div>
-
-    <!-- 3. Daily Note -->
+    <div id="intro-overlay"><svg id="intro-heart" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><div id="intro-content"><div id="intro-love">Syncing Hearts</div><div id="intro-percentage">0%</div><div class="progress-track"><div id="progress-fill"></div></div></div></div>
+    <div id="pin-overlay" class="hidden"><div class="pin-lock-icon">🔒</div><div class="pin-title">Enter Passcode</div><div class="pin-dots"><div class="pin-dot" id="dot1"></div><div class="pin-dot" id="dot2"></div><div class="pin-dot" id="dot3"></div><div class="pin-dot" id="dot4"></div></div><div class="pin-pad" id="pin-pad"><button class="pin-btn" onclick="handlePinInput('1')">1</button><button class="pin-btn" onclick="handlePinInput('2')">2</button><button class="pin-btn" onclick="handlePinInput('3')">3</button><button class="pin-btn" onclick="handlePinInput('4')">4</button><button class="pin-btn" onclick="handlePinInput('5')">5</button><button class="pin-btn" onclick="handlePinInput('6')">6</button><button class="pin-btn" onclick="handlePinInput('7')">7</button><button class="pin-btn" onclick="handlePinInput('8')">8</button><button class="pin-btn" onclick="handlePinInput('9')">9</button><button class="pin-btn action"></button><button class="pin-btn" onclick="handlePinInput('0')">0</button><button class="pin-btn action" onclick="deletePin()">⌫</button></div></div>
+    <div id="musicNoteContainer"><div id="musicNotePlayer" class="music-note-player"><div class="player-content"><div class="player-controls"><button class="edit-note-btn" onclick="openModal('noteModal')">📝</button><button class="close-note-btn" onclick="toggleMusicPlayer()">×</button></div><div id="noteTextDisplay" class="note-text-display"></div><div id="mediaContainer" style="width: 100%; height: 152px; display: flex; justify-content: center; align-items: center; border-radius: 12px; overflow: hidden; background: #f0f0f0;"></div><button id="ytFallbackBtn" onclick="window.open(this.getAttribute('data-href'), '_blank')" style="display:none; margin-top:12px; background:var(--pink-main); color:white; padding:10px 20px; border:none; border-radius:15px; font-weight:bold; cursor:pointer; width:100%;">🎵 Video blocked? Tap here to open in YouTube</button></div><div class="ig-progress-bar"><div id="igProgressFill" class="ig-progress-fill"></div></div></div><div class="music-note-bubble" onclick="toggleMusicPlayer()"><div class="music-note-avatar">❤️</div><span>Our Note</span></div></div>
+    <div class="box" style="border-bottom: 4px solid var(--pink-main);"><h1>Hi, Gulu! ❤️</h1><div class="subtitle" id="dynamicGreeting">Loading greeting...</div><div class="together-time" id="togetherCounter">0d 0h 0m 0s</div></div>
+    <div class="box polaroid-box"><div class="polaroid-pair"><div class="polaroid-frame"><div class="polaroid-img-container" id="nikkiImgContainer">Waiting for Nikki's photo...</div><div class="polaroid-caption">Nikki ❤️</div><label class="upload-label">📤 Upload<input type="file" id="nikkiUpload" class="upload-input" accept="image/*"></label></div><div class="polaroid-frame"><div class="polaroid-img-container" id="guluImgContainer">Waiting for Gulu's photo...</div><div class="polaroid-caption">Gulu ❤️</div><label class="upload-label">📤 Upload<input type="file" id="guluUpload" class="upload-input" accept="image/*"></label></div></div></div>
     <div class="box box-note" id="dailyNote">Loading your daily sweet note...</div>
-
-    <!-- 4. Calendar -->
-    <div class="box box-calendar">
-        <div class="scrollable-map" id="scrollMap" onclick="openCalendarView()"></div>
-        <div class="tap-hint">👆 Tap map to open full month view</div>
-        <button class="cute-btn" style="margin-top: 10px;" onclick="openDatePicker()">🗓️ Update Start Date</button>
-        <div class="sync-status" id="syncStatus">☁️ Connected</div>
-    </div>
-
-    <!-- 5. Cycle Dashboard -->
-    <div class="box">
-        <div class="dashboard-grid">
-            <div class="info-card ovulation-card">
-                <div class="info-icon">🌿</div>
-                <div class="info-label">Fertile Window</div>
-                <div class="info-date" id="nextOvulationDate">--</div>
-            </div>
-            <div class="info-card pms-card">
-                <div class="info-icon">☁️</div>
-                <div class="info-label">Next PMS</div>
-                <div class="info-date" id="nextPmsDate">--</div>
-            </div>
-            <div class="info-card period-card">
-                <div class="info-icon">🩸</div>
-                <div class="info-label">Next Period</div>
-                <div class="info-date" id="nextPeriodDate">--</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 6. Daily Scratch-Off Surprise -->
-    <div class="box">
-        <div class="info-label-header">🎁 Daily Scratch-Off Surprise</div>
-        <div class="scratch-container">
-            <div class="scratch-prize" id="scratchPrize"></div>
-            <canvas id="scratchCanvas" class="scratch-canvas"></canvas>
-        </div>
-        <div style="font-size: 10px; color: #aaa; margin-top: 5px;">👆 Use your finger to scratch!</div>
-    </div>
-
-    <!-- 7. Mood Check -->
-    <div class="box">
-        <div class="info-label-header">🧠 How is Gulu feeling today?</div>
-        <div class="mood-buttons">
-            <button class="mood-btn" onclick="saveMood('😊 Great')">😊 Great</button>
-            <button class="mood-btn" onclick="saveMood('😕 Okay')">😕 Okay</button>
-            <button class="mood-btn" onclick="saveMood('🥺 Needs a hug')">🥺 Hug</button>
-            <button class="mood-btn" onclick="saveMood('😢 Sad')">😢 Sad</button>
-            <button class="mood-btn" onclick="saveMood('🤒 Sick')">🤒 Sick</button>
-            <button class="mood-btn" onclick="saveMood('😴 Tired')">😴 Tired</button>
-            <button class="mood-btn" onclick="saveMood('😡 Angry')">😡 Angry</button>
-            <button class="mood-btn" onclick="saveMood('😰 Stressed')">😰 Stressed</button>
-            <button class="mood-btn" onclick="saveMood('🥳 Excited')">🥳 Excited</button>
-        </div>
-        <div class="display-box" id="moodDisplay">Haven't checked in yet today.</div>
-    </div>
-
-    <!-- 8. Our Little Corner -->
-    <div class="box">
-        <div class="info-label-header">✨ Our Little Corner</div>
-        <div class="shortcut-grid">
-            <div class="shortcut-card" onclick="openModal('lettersModal')">
-                <div class="shortcut-icon">💌</div>
-                <div class="shortcut-text">Love Letters</div>
-            </div>
-            <div class="shortcut-card" onclick="openModal('cravingsModal')">
-                <div class="shortcut-icon">🍰</div>
-                <div class="shortcut-text">Cravings</div>
-            </div>
-            <div class="shortcut-card" onclick="openModal('couponsModal')">
-                <div class="shortcut-icon">🎟️</div>
-                <div class="shortcut-text">Coupons</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODALS -->
-
-    <!-- NOTE & SONG EDITOR MODAL -->
-    <div class="modal-overlay" id="noteModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title">📝 Update Note</h2>
-                <button class="close-btn" onclick="closeModal('noteModal')">×</button>
-            </div>
-            <input type="text" id="noteInput" class="cute-input" placeholder="Type a short note (e.g. Thinking of you!)">
-            <input type="text" id="songInput" class="cute-input" placeholder="Paste a YouTube link (Spotify won't skip/auto-play)">
-            
-            <!-- INSTAGRAM SNIPPET SELECTOR (YouTube Only) -->
-            <div class="song-config-row">
-                <input type="number" id="startTimeInput" class="cute-input" placeholder="Start at (sec)" min="0" style="flex: 1;">
-                <select id="durationSelect" class="cute-input" style="flex: 1;">
-                    <option value="15">15s Snippet</option>
-                    <option value="30" selected>30s Snippet</option>
-                </select>
-            </div>
-            
-            <button class="cute-btn" onclick="saveNoteAndSong()">Update Note & Song</button>
-        </div>
-    </div>
-
-    <div class="modal-overlay" id="calendarModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title" id="modalTitle">Calendar Map</h2>
-                <button class="close-btn" onclick="closeModal('calendarModal')">×</button>
-            </div>
-            <div id="modalInstructions" style="font-size: 12px; color: #888; margin-bottom: 15px; display: none;">Tap the exact day her period started to update it:</div>
-            <div class="month-nav">
-                <button class="nav-btn" onclick="changeMonth(-1)">‹</button>
-                <span id="monthLabel" style="color: var(--text-dark); font-weight: bold; font-size: 16px;"></span>
-                <button class="nav-btn" onclick="changeMonth(1)">›</button>
-            </div>
-            <div class="calendar-grid" id="fullCalendarGrid"></div>
-        </div>
-    </div>
-
-    <div class="modal-overlay" id="lettersModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title">💌 Love Letters</h2>
-                <button class="close-btn" onclick="closeModal('lettersModal')">×</button>
-            </div>
-            <textarea id="letterInput" class="cute-input" rows="4" placeholder="Write a sweet letter..." style="resize: vertical;"></textarea>
-            <input type="text" id="letterSender" class="cute-input" placeholder="From (e.g. Me / Gulu)">
-            <button class="cute-btn" onclick="sendLetter()">Send Letter 💌</button>
-            <div id="lettersDisplay" style="margin-top: 20px; text-align: left;"></div>
-        </div>
-    </div>
-
-    <div class="modal-overlay" id="cravingsModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title">🍰 Cravings & Care</h2>
-                <button class="close-btn" onclick="closeModal('cravingsModal')">×</button>
-            </div>
-            <input type="text" id="cravingInput" class="cute-input" placeholder="What are you craving today? (e.g. Chocolate)">
-            <button class="cute-btn" onclick="saveCraving()">Save Craving</button>
-            <div class="display-box" id="cravingDisplay" style="margin-top: 20px;">No cravings logged yet.</div>
-        </div>
-    </div>
-
-    <div class="modal-overlay" id="couponsModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title">🎟️ Digital Coupon Book</h2>
-                <button class="close-btn" onclick="closeModal('couponsModal')">×</button>
-            </div>
-            <div id="couponsDisplay" style="text-align: left;"></div>
-        </div>
-    </div>
-
+    <div class="box box-calendar"><div class="scrollable-map" id="scrollMap" onclick="openCalendarView()"></div><div class="tap-hint">👆 Tap map to open full month view</div><button class="cute-btn" style="margin-top: 10px;" onclick="openDatePicker()">🗓️ Update Start Date</button><div class="sync-status" id="syncStatus">☁️ Connected</div></div>
+    <div class="box"><div class="dashboard-grid"><div class="info-card ovulation-card"><div class="info-icon">🌿</div><div class="info-label">Fertile Window</div><div class="info-date" id="nextOvulationDate">--</div></div><div class="info-card pms-card"><div class="info-icon">☁️</div><div class="info-label">Next PMS</div><div class="info-date" id="nextPmsDate">--</div></div><div class="info-card period-card"><div class="info-icon">🩸</div><div class="info-label">Next Period</div><div class="info-date" id="nextPeriodDate">--</div></div></div></div>
+    <div class="box"><div class="info-label-header">🎁 Daily Scratch-Off Surprise</div><div class="scratch-container"><div class="scratch-prize" id="scratchPrize"></div><canvas id="scratchCanvas" class="scratch-canvas"></canvas></div><div style="font-size: 10px; color: #aaa; margin-top: 5px;">👆 Use your finger to scratch!</div></div>
+    <div class="box"><div class="info-label-header">🧠 How is Gulu feeling today?</div><div class="mood-buttons"><button class="mood-btn" onclick="saveMood('😊 Great')">😊 Great</button><button class="mood-btn" onclick="saveMood('😕 Okay')">😕 Okay</button><button class="mood-btn" onclick="saveMood('🥺 Needs a hug')">🥺 Hug</button><button class="mood-btn" onclick="saveMood('😢 Sad')">😢 Sad</button><button class="mood-btn" onclick="saveMood('🤒 Sick')">🤒 Sick</button><button class="mood-btn" onclick="saveMood('😴 Tired')">😴 Tired</button><button class="mood-btn" onclick="saveMood('😡 Angry')">😡 Angry</button><button class="mood-btn" onclick="saveMood('😰 Stressed')">😰 Stressed</button><button class="mood-btn" onclick="saveMood('🥳 Excited')">🥳 Excited</button></div><div class="display-box" id="moodDisplay">Haven't checked in yet today.</div></div>
+    <div class="box"><div class="info-label-header">✨ Our Little Corner</div><div class="shortcut-grid"><div class="shortcut-card" onclick="openModal('lettersModal')"><div class="shortcut-icon">💌</div><div class="shortcut-text">Love Letters</div></div><div class="shortcut-card" onclick="openModal('cravingsModal')"><div class="shortcut-icon">🍰</div><div class="shortcut-text">Cravings</div></div><div class="shortcut-card" onclick="openModal('couponsModal')"><div class="shortcut-icon">🎟️</div><div class="shortcut-text">Coupons</div></div></div></div>
+    <div class="modal-overlay" id="noteModal"><div class="modal-content"><div class="modal-header"><h2 class="modal-title">📝 Update Note</h2><button class="close-btn" onclick="closeModal('noteModal')">×</button></div><input type="text" id="noteInput" class="cute-input" placeholder="Type a short note (e.g. Thinking of you!)"><input type="text" id="songInput" class="cute-input" placeholder="Paste a YouTube link (Spotify won't skip/auto-play)"><div class="song-config-row"><input type="number" id="startTimeInput" class="cute-input" placeholder="Start at (sec)" min="0" style="flex: 1;"><select id="durationSelect" class="cute-input" style="flex: 1;"><option value="15">15s Snippet</option><option value="30" selected>30s Snippet</option></select></div><button class="cute-btn" onclick="saveNoteAndSong()">Update Note & Song</button></div></div>
+    <div class="modal-overlay" id="calendarModal"><div class="modal-content"><div class="modal-header"><h2 class="modal-title" id="modalTitle">Calendar Map</h2><button class="close-btn" onclick="closeModal('calendarModal')">×</button></div><div id="modalInstructions" style="font-size: 12px; color: #888; margin-bottom: 15px; display: none;">Tap the exact day her period started to update it:</div><div class="month-nav"><button class="nav-btn" onclick="changeMonth(-1)">‹</button><span id="monthLabel" style="color: var(--text-dark); font-weight: bold; font-size: 16px;"></span><button class="nav-btn" onclick="changeMonth(1)">›</button></div><div class="calendar-grid" id="fullCalendarGrid"></div></div></div>
+    <div class="modal-overlay" id="lettersModal"><div class="modal-content"><div class="modal-header"><h2 class="modal-title">💌 Love Letters</h2><button class="close-btn" onclick="closeModal('lettersModal')">×</button></div><textarea id="letterInput" class="cute-input" rows="4" placeholder="Write a sweet letter..." style="resize: vertical;"></textarea><input type="text" id="letterSender" class="cute-input" placeholder="From (e.g. Me / Gulu)"><button class="cute-btn" onclick="sendLetter()">Send Letter 💌</button><div id="lettersDisplay" style="margin-top: 20px; text-align: left;"></div></div></div>
+    <div class="modal-overlay" id="cravingsModal"><div class="modal-content"><div class="modal-header"><h2 class="modal-title">🍰 Cravings & Care</h2><button class="close-btn" onclick="closeModal('cravingsModal')">×</button></div><input type="text" id="cravingInput" class="cute-input" placeholder="What are you craving today? (e.g. Chocolate)"><button class="cute-btn" onclick="saveCraving()">Save Craving</button><div class="display-box" id="cravingDisplay" style="margin-top: 20px;">No cravings logged yet.</div></div></div>
+    <div class="modal-overlay" id="couponsModal"><div class="modal-content"><div class="modal-header"><h2 class="modal-title">🎟️ Digital Coupon Book</h2><button class="close-btn" onclick="closeModal('couponsModal')">×</button></div><div id="couponsDisplay" style="text-align: left;"></div></div></div>
     <script>
-        const cycleLength = 26;
-        const periodDuration = 7;
-        const CORRECT_PIN = "0310"; // Your secret passcode
-        
+        const cycleLength = 26; const periodDuration = 7; const CORRECT_PIN = "0310"; 
         const FIREBASE_URL = "https://gulu100103-default-rtdb.asia-southeast1.firebasedatabase.app/lastDate.json";
         const CRAVING_FIREBASE_URL = "https://gulu100103-default-rtdb.asia-southeast1.firebasedatabase.app/craving.json";
         const MOOD_FIREBASE_URL = "https://gulu100103-default-rtdb.asia-southeast1.firebasedatabase.app/mood.json";
@@ -438,239 +170,133 @@
         const COUPONS_FIREBASE_URL = "https://gulu100103-default-rtdb.asia-southeast1.firebasedatabase.app/coupons.json";
         const PHOTOS_FIREBASE_URL = "https://gulu100103-default-rtdb.asia-southeast1.firebasedatabase.app/photos.json";
         const SONG_FIREBASE_URL = "https://gulu100103-default-rtdb.asia-southeast1.firebasedatabase.app/song.json";
-
-        const couponsList = [
-            "💆‍♀️ 1 Free Back Massage",
-            "🚗 I'll pick you up today",
-            "🫂 Long Hug whenever we meet",
-            "🌅 Breakfast/Dinner Date",
-            "🍿 You pick the movie tonight"
-        ];
-
-        const scratchSurprises = [
-            "Free Ice Cream today! 🍦",
-            "A long hug is waiting! 🫂",
-            "You look extra beautiful! 😍",
-            "Movie night tonight! 🍿",
-            "Free foot massage! 🦶",
-            "You are my sunshine! ☀️",
-            "Extra cuddles today! 🧸",
-            "I'll make you tea/coffee! ☕"
-        ];
-
-        const notes = [
-            "You are my favorite notification. Have a beautiful day, Gulu! 💕", "Just a daily reminder that you are deeply loved and cherished. 🥰", "Drink some water, take a deep breath, and know I'm thinking of you! 💧", "Your smile is my favorite thing in the whole world. Keep shining! ✨", "I'm so incredibly lucky to have you in my life. ❤️", "Whatever today brings, we handle it together. I love you! 🌸", "You are stronger and more beautiful than you know, Gulu! 🦋", "Sending you a massive virtual hug right now! 🤗", "You make every single day better just by being in it. ☀️", "Don't forget to treat yourself today. You deserve the world! 🍫", "I love you more today than I did yesterday. ❤️", "You are my safe place and my favorite adventure. 🌍", "Take it easy today, Gulu. I'm always right here for you. 🛋️", "Your laugh is my favorite melody. Hope you smile a lot today! 🎶", "Just dropping in to say: You are absolutely perfect to me. 😍", "You're doing amazing, sweetie! Keep going! 🌟", "I hope your day is as sweet and beautiful as you are. 🌷", "If you're feeling tired, rest. I've got your back, always. 🛌", "You are the best thing that ever happened to me. 💖", "Every day I spend with you is my new favorite day. 📆", "I'm sending you all my energy and love today! ⚡❤️", "You are a literal angel. Never forget that! 👼", "I'm so proud of you and everything you do. 🏆", "You mean the universe to me, Gulu. 🌌", "Take a moment to relax today. You've earned it! 🛀", "You're my forever favorite person. 👩‍❤️‍👨", "I love you past the moon and the stars! 🚀", "Whenever you feel stressed, remember I'm just a call away. 📞", "You look gorgeous today (I just know it!). 👗", "My love for you grows bigger every single day. 📈", "You are my dream come true. Sweet dreams, my Gulu. 💭"
-        ];
-
-        let lastPeriodDate = new Date('2026-07-06');
-        let viewYear = new Date().getFullYear();
-        let viewMonth = new Date().getMonth();
-        let isDatePicker = false;
-        const togetherStartDate = new Date('2025-07-21T16:30:00');
-        let currentPin = "";
-        let igTimer = null;
-
-        // --- PASSCODE LOGIC ---
+        const couponsList = ["💆‍♀️ 1 Free Back Massage","🚗 I'll pick you up today","🫂 Long Hug whenever we meet","🌅 Breakfast/Dinner Date","🍿 You pick the movie tonight"];
+        const scratchSurprises = ["Free Ice Cream today! 🍦","A long hug is waiting! 🫂","You look extra beautiful! 😍","Movie night tonight! 🍿","Free foot massage! 🦶","You are my sunshine! ☀️","Extra cuddles today! 🧸","I'll make you tea/coffee! ☕"];
+        const notes = ["You are my favorite notification. Have a beautiful day, Gulu! 💕","Just a daily reminder that you are deeply loved and cherished. 🥰","Drink some water, take a deep breath, and know I'm thinking of you! 💧","Your smile is my favorite thing in the whole world. Keep shining! ✨","I'm so incredibly lucky to have you in my life. ❤️","Whatever today brings, we handle it together. I love you! 🌸","You are stronger and more beautiful than you know, Gulu! 🦋","Sending you a massive virtual hug right now! 🤗","You make every single day better just by being in it. ☀️","Don't forget to treat yourself today. You deserve the world! 🍫","I love you more today than I did yesterday. ❤️","You are my safe place and my favorite adventure. 🌍","Take it easy today, Gulu. I'm always right here for you. 🛋️","Your laugh is my favorite melody. Hope you smile a lot today! 🎶","Just dropping in to say: You are absolutely perfect to me. 😍","You're doing amazing, sweetie! Keep going! 🌟","I hope your day is as sweet and beautiful as you are. 🌷","If you're feeling tired, rest. I've got your back, always. 🛌","You are the best thing that ever happened to me. 💖","Every day I spend with you is my new favorite day. 📆","I'm sending you all my energy and love today! ⚡❤️","You are a literal angel. Never forget that! 👼","I'm so proud of you and everything you do. 🏆","You mean the universe to me, Gulu. 🌌","Take a moment to relax today. You've earned it! 🛀","You're my forever favorite person. 👩‍❤️‍👨","I love you past the moon and the stars! 🚀","Whenever you feel stressed, remember I'm just a call away. 📞","You look gorgeous today (I just know it!). 👗","My love for you grows bigger every single day. 📈","You are my dream come true. Sweet dreams, my Gulu. 💭"];
+        let lastPeriodDate = new Date('2026-07-06'); let viewYear = new Date().getFullYear(); let viewMonth = new Date().getMonth(); let isDatePicker = false; const togetherStartDate = new Date('2025-07-21T16:30:00'); let currentPin = ""; let igTimer = null;
         function showPinPad() { document.getElementById('pin-overlay').classList.remove('hidden'); }
         function handlePinInput(num) { if (currentPin.length < 4) { currentPin += num; updatePinDots(); if (currentPin.length === 4) { setTimeout(checkPin, 200); } } }
         function deletePin() { currentPin = currentPin.slice(0, -1); updatePinDots(); }
         function updatePinDots() { for(let i=1; i<=4; i++) { if (i <= currentPin.length) document.getElementById('dot'+i).classList.add('filled'); else document.getElementById('dot'+i).classList.remove('filled'); } }
         function checkPin() { if (currentPin === CORRECT_PIN) { document.getElementById('pin-overlay').classList.add('hidden'); currentPin = ""; updatePinDots(); } else { const pad = document.getElementById('pin-pad'); pad.classList.add('shake'); setTimeout(() => pad.classList.remove('shake'), 400); currentPin = ""; setTimeout(updatePinDots, 400); } }
-
         function getTodayStr() { const t = new Date(); return t.getFullYear() + "-" + String(t.getMonth() + 1).padStart(2, '0') + "-" + String(t.getDate()).padStart(2, '0'); }
         function getDynamicGreeting() { const h = new Date().getHours(); if (h >= 5 && h < 12) return "Good morning, my sunshine Gulu! ☀️"; if (h >= 12 && h < 17) return "Having a good day, Gulu? 🌸"; if (h >= 17 && h < 21) return "Good evening, beautiful Gulu. 🌙"; return "Sleep well, my love Gulu. Sweet dreams. 🌌"; }
-
-        // --- INTRO LOADER LOGIC ---
-        function startIntro() {
-            const overlay = document.getElementById('intro-overlay'); const heart = document.getElementById('intro-heart'); const percentage = document.getElementById('intro-percentage'); const progressFill = document.getElementById('progress-fill');
-            const duration = 1500; const startTime = performance.now();
-            function animate(now) {
-                let elapsed = now - startTime; let progress = Math.min(elapsed / duration, 1); let count = Math.floor(progress * 1000);
-                percentage.innerText = count + "%"; progressFill.style.width = (count / 10) + '%'; let scaleVal = count / 25; heart.style.transform = `translateZ(0) scale(${scaleVal})`;
-                if (progress < 1) { requestAnimationFrame(animate); } else { percentage.innerText = "1000%"; progressFill.style.width = '100%'; heart.style.transform = 'translateZ(0) scale(40)'; setTimeout(() => { overlay.style.opacity = '0'; overlay.style.transform = 'scale(1.1)'; setTimeout(() => { overlay.style.display = 'none'; showPinPad(); init(); }, 800); }, 400); }
-            }
-            requestAnimationFrame(animate);
-        }
-
-        // --- FROSTED GLASS DIAGONAL HEART BUBBLES ---
-        function spawnHeartBubbles() { for(let i=0; i<8; i++) { let bubble = document.createElement('div'); bubble.className = 'heart-bubble'; let size = 20 + Math.random() * 40; bubble.style.width = size + 'px'; bubble.style.height = size + 'px'; bubble.style.marginLeft = (Math.random() * 50) + 'px'; bubble.style.marginBottom = (Math.random() * 50) + 'px'; bubble.style.animationDuration = (1.2 + Math.random() * 0.8) + 's'; bubble.innerHTML = `<svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="rgba(255, 77, 109, 0.35)" stroke="rgba(255, 255, 255, 0.8)" stroke-width="0.5"/></svg>`; document.body.appendChild(bubble); setTimeout(() => bubble.remove(), 2000); } }
-
-        // --- NOTIFICATION LOGIC ---
+        function startIntro() { try { const overlay = document.getElementById('intro-overlay'); const heart = document.getElementById('intro-heart'); const percentage = document.getElementById('intro-percentage'); const progressFill = document.getElementById('progress-fill'); const duration = 1500; const startTime = performance.now(); function animate(now) { let elapsed = now - startTime; let progress = Math.min(elapsed / duration, 1); let count = Math.floor(progress * 1000); percentage.innerText = count + "%"; progressFill.style.width = (count / 10) + '%'; let scaleVal = count / 25; heart.style.transform = `translateZ(0) scale(${scaleVal})`; if (progress < 1) { requestAnimationFrame(animate); } else { percentage.innerText = "1000%"; progressFill.style.width = '100%'; heart.style.transform = 'translateZ(0) scale(40)'; setTimeout(() => { overlay.style.opacity = '0'; overlay.style.transform = 'scale(1.1)'; setTimeout(() => { overlay.style.display = 'none'; showPinPad(); init(); }, 800); }, 400); } } requestAnimationFrame(animate); } catch(e) { console.error("Intro Error:", e); init(); } }
+        function spawnHeartBubbles() { try { for(let i=0; i<8; i++) { let bubble = document.createElement('div'); bubble.className = 'heart-bubble'; let size = 20 + Math.random() * 40; bubble.style.width = size + 'px'; bubble.style.height = size + 'px'; bubble.style.marginLeft = (Math.random() * 50) + 'px'; bubble.style.marginBottom = (Math.random() * 50) + 'px'; bubble.style.animationDuration = (1.2 + Math.random() * 0.8) + 's'; bubble.innerHTML = `<svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="rgba(255, 77, 109, 0.35)" stroke="rgba(255, 255, 255, 0.8)" stroke-width="0.5"/></svg>`; document.body.appendChild(bubble); setTimeout(() => bubble.remove(), 2000); } } catch(e){} }
         function setupNotifications() { if (!("Notification" in window)) return; if (Notification.permission === "default") Notification.requestPermission(); setInterval(() => { const now = new Date(); const lastAlert = localStorage.getItem('lastPhotoAlert'); const todayStr = getTodayStr(); if (now.getHours() === 9 && now.getMinutes() === 0 && lastAlert !== todayStr) { if (Notification.permission === "granted") { new Notification("📸 Daily Polaroid Time!", { body: "Good morning! Don't forget to upload your photo for Gulu. ❤️" }); localStorage.setItem('lastPhotoAlert', todayStr); } } }, 60000); }
+        function setupScratchCard() {
+            try {
+                const canvas = document.getElementById('scratchCanvas');
+                if (!canvas) return;
+                const prizeDiv = document.getElementById('scratchPrize');
+                if (!prizeDiv) return;
+                const todayStr = getTodayStr();
+                const savedScratchDate = localStorage.getItem('scratchDate');
+                let prizeIndex = parseInt(localStorage.getItem('scratchPrizeIndex'));
+                if (savedScratchDate !== todayStr || isNaN(prizeIndex)) { prizeIndex = Math.floor(Math.random() * scratchSurprises.length); localStorage.setItem('scratchDate', todayStr); localStorage.setItem('scratchPrizeIndex', prizeIndex); }
+                prizeDiv.innerText = scratchSurprises[prizeIndex];
+                
+                // Delay drawing to ensure layout is fully rendered
+                setTimeout(() => {
+                    const ctx = canvas.getContext('2d');
+                    canvas.width = canvas.offsetWidth || 300;
+                    canvas.height = canvas.offsetHeight || 100;
+                    ctx.fillStyle = '#b0b0b0';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    ctx.fillStyle = '#fff0f3';
+                    ctx.font = 'bold 18px Segoe UI';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText('Scratch Here! 👆', canvas.width / 2, canvas.height / 2);
+                    let isDrawing = false;
+                    function getPos(e) {
+                        const rect = canvas.getBoundingClientRect();
+                        let clientX, clientY;
+                        if (e.touches && e.touches.length > 0) { clientX = e.touches[0].clientX; clientY = e.touches[0].clientY; } 
+                        else if (e.changedTouches && e.changedTouches.length > 0) { clientX = e.changedTouches[0].clientX; clientY = e.changedTouches[0].clientY; } 
+                        else { clientX = e.clientX; clientY = e.clientY; }
+                        return { x: clientX - rect.left, y: clientY - rect.top };
+                    }
+                    function scratch(pos) {
+                        ctx.globalCompositeOperation = 'destination-out';
+                        ctx.beginPath();
+                        ctx.arc(pos.x, pos.y, 25, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                    function startDraw(e) { isDrawing = true; e.preventDefault(); scratch(getPos(e)); }
+                    function draw(e) { if (!isDrawing) return; e.preventDefault(); scratch(getPos(e)); }
+                    function stopDraw() { isDrawing = false; }
+                    
+                    // Pointer events (modern standard, covers mouse + touch + stylus)
+                    canvas.addEventListener('pointerdown', startDraw);
+                    canvas.addEventListener('pointermove', draw);
+                    canvas.addEventListener('pointerup', stopDraw);
+                    canvas.addEventListener('pointerleave', stopDraw);
+                    
+                    // Fallback touch events
+                    canvas.addEventListener('touchstart', startDraw, { passive: false });
+                    canvas.addEventListener('touchmove', draw, { passive: false });
+                    canvas.addEventListener('touchend', stopDraw);
 
-        // --- SCRATCH CARD LOGIC ---
-        function setupScratchCard() { const canvas = document.getElementById('scratchCanvas'); if (!canvas) return; const prizeDiv = document.getElementById('scratchPrize'); const todayStr = getTodayStr(); const savedScratchDate = localStorage.getItem('scratchDate'); let prizeIndex = parseInt(localStorage.getItem('scratchPrizeIndex')); if (savedScratchDate !== todayStr || isNaN(prizeIndex)) { prizeIndex = Math.floor(Math.random() * scratchSurprises.length); localStorage.setItem('scratchDate', todayStr); localStorage.setItem('scratchPrizeIndex', prizeIndex); } prizeDiv.innerText = scratchSurprises[prizeIndex]; const ctx = canvas.getContext('2d'); canvas.width = canvas.offsetWidth || 300; canvas.height = canvas.offsetHeight || 100; ctx.fillStyle = '#b0b0b0'; ctx.fillRect(0, 0, canvas.width, canvas.height); ctx.fillStyle = '#fff0f3'; ctx.font = 'bold 18px Segoe UI'; ctx.textAlign = 'center'; ctx.fillText('Scratch Here! 👆', canvas.width / 2, canvas.height / 2 + 6); let isDrawing = false; function getPos(e) { const rect = canvas.getBoundingClientRect(); const clientX = e.touches ? e.touches[0].clientX : e.clientX; const clientY = e.touches ? e.touches[0].clientY : e.clientY; return { x: clientX - rect.left, y: clientY - rect.top }; } function startDraw(e) { isDrawing = true; e.preventDefault(); } function draw(e) { if (!isDrawing) return; e.preventDefault(); const pos = getPos(e); ctx.globalCompositeOperation = 'destination-out'; ctx.beginPath(); ctx.arc(pos.x, pos.y, 25, 0, Math.PI * 2); ctx.fill(); } function stopDraw() { isDrawing = false; } canvas.addEventListener('mousedown', startDraw); canvas.addEventListener('mousemove', draw); document.addEventListener('mouseup', stopDraw); canvas.addEventListener('touchstart', startDraw, {passive: false}); canvas.addEventListener('touchmove', draw, {passive: false}); canvas.addEventListener('touchend', stopDraw); }
-
-        // --- POLAROID LOGIC ---
+                           // Fallback mouse events
+                    canvas.addEventListener('mousedown', startDraw);
+                    canvas.addEventListener('mousemove', draw);
+                    document.addEventListener('mouseup', stopDraw);
+                }, 200);
+            } catch(e) { console.error("Scratch Card Setup Error:", e); }
+        }
         function handlePhotoUpload(inputElement, person) { const file = inputElement.files[0]; if (!file) return; const reader = new FileReader(); reader.onload = function(e) { const img = new Image(); img.onload = function() { const canvas = document.createElement('canvas'); const ctx = canvas.getContext('2d'); const MAX_WIDTH = 300; let scale = MAX_WIDTH / img.width; canvas.width = MAX_WIDTH; canvas.height = img.height * scale; ctx.drawImage(img, 0, 0, canvas.width, canvas.height); const base64Str = canvas.toDataURL('image/jpeg', 0.6); savePhotoToDB(person, base64Str); }; img.src = e.target.result; }; reader.readAsDataURL(file); }
         async function savePhotoToDB(person, base64Str) { const todayStr = getTodayStr(); try { let res = await fetch(PHOTOS_FIREBASE_URL); let photos = await res.json() || {}; photos[person] = { date: todayStr, img: base64Str }; await fetch(PHOTOS_FIREBASE_URL, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(photos) }); fetchPhotos(); alert("Photo uploaded for today! ❤️"); } catch(e) { console.error("Photo Save Error:", e); alert("Failed to upload photo."); } }
-        async function fetchPhotos() { try { let res = await fetch(PHOTOS_FIREBASE_URL); let photos = await res.json() || {}; const todayStr = getTodayStr(); const nikkiContainer = document.getElementById('nikkiImgContainer'); if (photos.nikki && photos.nikki.date === todayStr && photos.nikki.img) nikkiContainer.innerHTML = `<img src="${photos.nikki.img}" class="polaroid-img">`; else nikkiContainer.innerHTML = "Waiting for Nikki's photo..."; const guluContainer = document.getElementById('guluImgContainer'); if (photos.gulu && photos.gulu.date === todayStr && photos.gulu.img) guluContainer.innerHTML = `<img src="${photos.gulu.img}" class="polaroid-img">`; else guluContainer.innerHTML = "Waiting for Gulu's photo..."; } catch(e) { console.error("Photo Fetch Error:", e); } }
-
+        async function fetchPhotos() { try { let res = await fetch(PHOTOS_FIREBASE_URL); let photos = await res.json() || {}; const todayStr = getTodayStr(); const nikkiContainer = document.getElementById('nikkiImgContainer'); if (nikkiContainer) { if (photos.nikki && photos.nikki.date === todayStr && photos.nikki.img) nikkiContainer.innerHTML = `<img src="${photos.nikki.img}" class="polaroid-img">`; else nikkiContainer.innerHTML = "Waiting for Nikki's photo..."; } const guluContainer = document.getElementById('guluImgContainer'); if (guluContainer) { if (photos.gulu && photos.gulu.date === todayStr && photos.gulu.img) guluContainer.innerHTML = `<img src="${photos.gulu.img}" class="polaroid-img">`; else guluContainer.innerHTML = "Waiting for Gulu's photo..."; } } catch(e) { console.error("Photo Fetch Error:", e); } }
         function getDayStatus(dateToCheck) { const date = new Date(dateToCheck); date.setHours(0,0,0,0); const start = new Date(lastPeriodDate); start.setHours(0,0,0,0); const diffTime = date - start; const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24)); let dayOfCycle = diffDays % cycleLength; if (dayOfCycle < 0) dayOfCycle += cycleLength; if (dayOfCycle >= 0 && dayOfCycle < periodDuration) return 'period'; if (dayOfCycle >= 11 && dayOfCycle <= 18) return 'ovulation'; return 'safe'; }
-
         async function init() {
-            document.getElementById('dynamicGreeting').innerText = getDynamicGreeting();
-            setInterval(() => { document.getElementById('dynamicGreeting').innerText = getDynamicGreeting(); }, 60000);
-            document.getElementById('dailyNote').innerText = notes[new Date().getDate() - 1];
-            document.getElementById('syncStatus').innerText = "☁️ Syncing data...";
-            lastPeriodDate = await fetchDateFromDB();
-            updateDisplay(); document.getElementById('syncStatus').innerText = "☁️ Up to date";
-            updateTogetherCounter(); setInterval(updateTogetherCounter, 1000);
-            document.getElementById('nikkiUpload').addEventListener('change', function() { handlePhotoUpload(this, 'nikki'); });
-            document.getElementById('guluUpload').addEventListener('change', function() { handlePhotoUpload(this, 'gulu'); });
-            fetchPhotos(); fetchCraving(); fetchMood(); fetchLetters(); fetchCoupons(); fetchNoteAndSong();
-            setInterval(fetchPhotos, 5000); setInterval(fetchCraving, 5000); setInterval(fetchMood, 5000); setInterval(fetchLetters, 5000); setInterval(fetchCoupons, 5000); setInterval(fetchNoteAndSong, 5000);
-            setupNotifications(); setupScratchCard();
-        }
-
+            try {
+                document.getElementById('dynamicGreeting').innerText = getDynamicGreeting();
+                setInterval(() => { document.getElementById('dynamicGreeting').innerText = getDynamicGreeting(); }, 60000);
+                document.getElementById('dailyNote').innerText = notes[new Date().getDate() - 1];
+                document.getElementById('syncStatus').innerText = "☁️ Syncing data...";
+                lastPeriodDate = await fetchDateFromDB();
+                updateDisplay(); 
+                document.getElementById('syncStatus').innerText = "☁️ Up to date";
+                updateTogetherCounter(); 
+                setInterval(updateTogetherCounter, 1000);
+                document.getElementById('nikkiUpload').addEventListener('change', function() { handlePhotoUpload(this, 'nikki'); });
+                document.getElementById('guluUpload').addEventListener('change', function() { handlePhotoUpload(this, 'gulu'); });
+                try { setupScratchCard(); } catch(e) { console.error("Scratch Error:", e); }
+                try { setupNotifications(); } catch(e) { console.error("Notification Error:", e); }
+                fetchPhotos(); fetchCraving(); fetchMood(); fetchLetters(); fetchCoupons(); fetchNoteAndSong();
+                setInterval(fetchPhotos, 5000); setInterval(fetchCraving, 5000); setInterval(fetchMood, 5000); setInterval(fetchLetters, 5000); setInterval(fetchCoupons, 5000); setInterval(fetchNoteAndSong, 5000);
+            } catch(e) {
+                console.error("Initialization Error:", e);
+                const syncEl = document.getElementById('syncStatus');
+                if (syncEl) syncEl.innerText = "☁️ Offline mode";
+            }
+            }
         function updateTogetherCounter() { const now = new Date(); let diff = now - togetherStartDate; if (diff < 0) { document.getElementById('togetherCounter').innerText = "0d 0h 0m 0s"; return; } const days = Math.floor(diff / (1000 * 60 * 60 * 24)); diff -= days * (1000 * 60 * 60 * 24); const hours = Math.floor(diff / (1000 * 60 * 60)); diff -= hours * (1000 * 60 * 60); const mins = Math.floor(diff / (1000 * 60)); diff -= mins * (1000 * 60); const secs = Math.floor(diff / 1000); document.getElementById('togetherCounter').innerText = "❤️ " + days + "d " + hours + "h " + mins + "m " + secs + "s"; }
         function updateDisplay() { renderScrollableMap(); updateDashboard(); }
-        function renderScrollableMap() { const container = document.getElementById('scrollMap'); container.innerHTML = ''; const today = new Date(); today.setHours(0,0,0,0); const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']; for(let i = -15; i <= 15; i++) { let d = new Date(today); d.setDate(today.getDate() + i); const status = getDayStatus(d); const isToday = d.getTime() === today.getTime(); let prevD = new Date(d); prevD.setDate(d.getDate() - 1); let nextD = new Date(d); nextD.setDate(d.getDate() + 1); const prevStatus = getDayStatus(prevD); const nextStatus = getDayStatus(nextD); let card = document.createElement('div'); let classes = 'day-card ' + status + (isToday ? ' today' : ''); if ((status === 'period' || status === 'ovulation') && status === prevStatus) classes += ' no-left-radius'; if ((status === 'period' || status === 'ovulation') && status === nextStatus) classes += ' no-right-radius'; card.className = classes; if (isToday) card.id = 'todayCard'; card.innerHTML = '<div class="day-name">' + daysOfWeek[d.getDay()] + '</div><div class="day-num">' + d.getDate() + '</div>'; container.appendChild(card); } setTimeout(() => { const todayEl = document.getElementById('todayCard'); if (todayEl) todayEl.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' }); }, 100); }
+        function renderScrollableMap() { try { const container = document.getElementById('scrollMap'); if(!container) return; container.innerHTML = ''; const today = new Date(); today.setHours(0,0,0,0); const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']; for(let i = -15; i <= 15; i++) { let d = new Date(today); d.setDate(today.getDate() + i); const status = getDayStatus(d); const isToday = d.getTime() === today.getTime(); let prevD = new Date(d); prevD.setDate(d.getDate() - 1); let nextD = new Date(d); nextD.setDate(d.getDate() + 1); const prevStatus = getDayStatus(prevD); const nextStatus = getDayStatus(nextD); let card = document.createElement('div'); let classes = 'day-card ' + status + (isToday ? ' today' : ''); if ((status === 'period' || status === 'ovulation') && status === prevStatus) classes += ' no-left-radius'; if ((status === 'period' || status === 'ovulation') && status === nextStatus) classes += ' no-right-radius'; card.className = classes; if (isToday) card.id = 'todayCard'; card.innerHTML = '<div class="day-name">' + daysOfWeek[d.getDay()] + '</div><div class="day-num">' + d.getDate() + '</div>'; container.appendChild(card); } setTimeout(() => { const todayEl = document.getElementById('todayCard'); if (todayEl) todayEl.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' }); }, 100); } catch(e) { console.error("Render Map Error:", e); } }
         function openCalendarView() { isDatePicker = false; document.getElementById('modalTitle').innerText = "Calendar Map"; document.getElementById('modalInstructions').style.display = 'none'; viewYear = new Date().getFullYear(); viewMonth = new Date().getMonth(); renderFullCalendar(false); document.getElementById('calendarModal').classList.add('active'); spawnHeartBubbles(); }
         function openDatePicker() { isDatePicker = true; document.getElementById('modalTitle').innerText = "Select Start Date"; document.getElementById('modalInstructions').style.display = 'block'; viewYear = new Date().getFullYear(); viewMonth = new Date().getMonth(); renderFullCalendar(true); document.getElementById('calendarModal').classList.add('active'); spawnHeartBubbles(); }
-       function openModal(id) { if (id === 'calendarModal') openCalendarView(); else { document.getElementById(id).classList.add('active'); spawnHeartBubbles(); } }
+        function openModal(id) { if (id === 'calendarModal') openCalendarView(); else { document.getElementById(id).classList.add('active'); spawnHeartBubbles(); } }
         function closeModal(id) { document.getElementById(id).classList.remove('active'); spawnHeartBubbles(); }
         function changeMonth(dir) { viewMonth += dir; if (viewMonth < 0) { viewMonth = 11; viewYear--; } if (viewMonth > 11) { viewMonth = 0; viewYear++; } renderFullCalendar(isDatePicker); }
-        function renderFullCalendar(forDatePicking = false) { const grid = document.getElementById('fullCalendarGrid'); grid.innerHTML = ''; const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]; document.getElementById('monthLabel').innerText = monthNames[viewMonth] + " " + viewYear; const daysOfWeek = ['S', 'M', 'T', 'W', 'T', 'F', 'S']; daysOfWeek.forEach(day => { grid.innerHTML += '<div class="cal-cell cal-header">' + day + '</div>'; }); const startRenderDate = new Date(viewYear, viewMonth, 1); const startDay = startRenderDate.getDay(); startRenderDate.setDate(startRenderDate.getDate() - startDay); const today = new Date(); today.setHours(0,0,0,0); for(let i = 0; i < 42; i++) { let cellDate = new Date(startRenderDate); cellDate.setDate(startRenderDate.getDate() + i); const status = forDatePicking ? '' : getDayStatus(cellDate); const isToday = cellDate.getTime() === today.getTime(); let prevDate = new Date(cellDate); prevDate.setDate(cellDate.getDate() - 1); let nextDate = new Date(cellDate); nextDate.setDate(cellDate.getDate() + 1); const prevStatus = forDatePicking ? '' : getDayStatus(prevDate); const nextStatus = forDatePicking ? '' : getDayStatus(nextDate); let cell = document.createElement('div'); let classes = 'cal-cell ' + status + (isToday && !forDatePicking ? ' today' : ''); if (cellDate.getMonth() !== viewMonth) classes += ' out-of-month'; if ((status === 'period' || status === 'ovulation') && status === prevStatus) classes += ' no-left-radius'; if ((status === 'period' || status === 'ovulation') && status === nextStatus) classes += ' no-right-radius'; cell.className = classes; if (cellDate.getMonth() !== viewMonth) cell.style.opacity = '0.3'; cell.innerText = cellDate.getDate(); if (forDatePicking) { cell.onclick = () => confirmNewDate(cellDate); } grid.appendChild(cell); } }
-        function updateDashboard() { const today = new Date(); today.setHours(0,0,0,0); const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']; let baseCycleStart = new Date(lastPeriodDate); baseCycleStart.setHours(0,0,0,0); while (baseCycleStart.getTime() + cycleLength * 86400000 <= today.getTime()) { baseCycleStart.setDate(baseCycleStart.getDate() + cycleLength); } let nextPeriodStart = new Date(baseCycleStart); if (today > new Date(baseCycleStart.getTime() + (periodDuration - 1) * 86400000)) { nextPeriodStart.setDate(nextPeriodStart.getDate() + cycleLength); } let periodEnd = new Date(nextPeriodStart); periodEnd.setDate(nextPeriodStart.getDate() + periodDuration - 1); let fertileStart = new Date(baseCycleStart); fertileStart.setDate(baseCycleStart.getDate() + 11); let fertileEnd = new Date(baseCycleStart); fertileEnd.setDate(baseCycleStart.getDate() + 18); if (today > fertileEnd) { fertileStart.setDate(fertileStart.getDate() + cycleLength); fertileEnd.setDate(fertileEnd.getDate() + cycleLength); } let pmsBasePeriod = new Date(nextPeriodStart); if (today >= nextPeriodStart && today <= periodEnd) { pmsBasePeriod.setDate(pmsBasePeriod.getDate() + cycleLength); } let pmsStart = new Date(pmsBasePeriod); pmsStart.setDate(pmsBasePeriod.getDate() - 3); let pmsEnd = new Date(pmsBasePeriod); pmsEnd.setDate(pmsBasePeriod.getDate() - 1); const formatDateRange = (d1, d2) => { let txt = d1.getDate() + ""; if (d1.getMonth() !== d2.getMonth()) { txt += " " + months[d1.getMonth()]; } txt += " - " + d2.getDate() + " " + months[d2.getMonth()]; return txt; }; document.getElementById('nextOvulationDate').innerText = formatDateRange(fertileStart, fertileEnd); document.getElementById('nextPmsDate').innerText = formatDateRange(pmsStart, pmsEnd); document.getElementById('nextPeriodDate').innerText = formatDateRange(nextPeriodStart, periodEnd); }
+        function renderFullCalendar(forDatePicking = false) { try { const grid = document.getElementById('fullCalendarGrid'); if(!grid) return; grid.innerHTML = ''; const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]; document.getElementById('monthLabel').innerText = monthNames[viewMonth] + " " + viewYear; const daysOfWeek = ['S', 'M', 'T', 'W', 'T', 'F', 'S']; daysOfWeek.forEach(day => { grid.innerHTML += '<div class="cal-cell cal-header">' + day + '</div>'; }); const startRenderDate = new Date(viewYear, viewMonth, 1); const startDay = startRenderDate.getDay(); startRenderDate.setDate(startRenderDate.getDate() - startDay); const today = new Date(); today.setHours(0,0,0,0); for(let i = 0; i < 42; i++) { let cellDate = new Date(startRenderDate); cellDate.setDate(startRenderDate.getDate() + i); const status = forDatePicking ? '' : getDayStatus(cellDate); const isToday = cellDate.getTime() === today.getTime(); let prevDate = new Date(cellDate); prevDate.setDate(cellDate.getDate() - 1); let nextDate = new Date(cellDate); nextDate.setDate(cellDate.getDate() + 1); const prevStatus = forDatePicking ? '' : getDayStatus(prevDate); const nextStatus = forDatePicking ? '' : getDayStatus(nextDate); let cell = document.createElement('div'); let classes = 'cal-cell ' + status + (isToday && !forDatePicking ? ' today' : ''); if (cellDate.getMonth() !== viewMonth) classes += ' out-of-month'; if ((status === 'period' || status === 'ovulation') && status === prevStatus) classes += ' no-left-radius'; if ((status === 'period' || status === 'ovulation') && status === nextStatus) classes += ' no-right-radius'; cell.className = classes; if (cellDate.getMonth() !== viewMonth) cell.style.opacity = '0.3'; cell.innerText = cellDate.getDate(); if (forDatePicking) { cell.onclick = () => confirmNewDate(cellDate); } grid.appendChild(cell); } } catch(e) { console.error("Render Calendar Error:", e); } }
+        function updateDashboard() { try { const today = new Date(); today.setHours(0,0,0,0); const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']; let baseCycleStart = new Date(lastPeriodDate); baseCycleStart.setHours(0,0,0,0); while (baseCycleStart.getTime() + cycleLength * 86400000 <= today.getTime()) { baseCycleStart.setDate(baseCycleStart.getDate() + cycleLength); } let nextPeriodStart = new Date(baseCycleStart); if (today > new Date(baseCycleStart.getTime() + (periodDuration - 1) * 86400000)) { nextPeriodStart.setDate(nextPeriodStart.getDate() + cycleLength); } let periodEnd = new Date(nextPeriodStart); periodEnd.setDate(nextPeriodStart.getDate() + periodDuration - 1); let fertileStart = new Date(baseCycleStart); fertileStart.setDate(baseCycleStart.getDate() + 11); let fertileEnd = new Date(baseCycleStart); fertileEnd.setDate(baseCycleStart.getDate() + 18); if (today > fertileEnd) { fertileStart.setDate(fertileStart.getDate() + cycleLength); fertileEnd.setDate(fertileEnd.getDate() + cycleLength); } let pmsBasePeriod = new Date(nextPeriodStart); if (today >= nextPeriodStart && today <= periodEnd) { pmsBasePeriod.setDate(pmsBasePeriod.getDate() + cycleLength); } let pmsStart = new Date(pmsBasePeriod); pmsStart.setDate(pmsBasePeriod.getDate() - 3); let pmsEnd = new Date(pmsBasePeriod); pmsEnd.setDate(pmsBasePeriod.getDate() - 1); const formatDateRange = (d1, d2) => { let txt = d1.getDate() + ""; if (d1.getMonth() !== d2.getMonth()) { txt += " " + months[d1.getMonth()]; } txt += " - " + d2.getDate() + " " + months[d2.getMonth()]; return txt; }; document.getElementById('nextOvulationDate').innerText = formatDateRange(fertileStart, fertileEnd); document.getElementById('nextPmsDate').innerText = formatDateRange(pmsStart, pmsEnd); document.getElementById('nextPeriodDate').innerText = formatDateRange(nextPeriodStart, periodEnd); } catch(e) { console.error("Dashboard Error:", e); } }
         async function confirmNewDate(selectedDate) { lastPeriodDate = selectedDate; updateDisplay(); closeModal('calendarModal'); let y = selectedDate.getFullYear(); let m = String(selectedDate.getMonth() + 1).padStart(2, '0'); let d = String(selectedDate.getDate()).padStart(2, '0'); let dateStr = y + "-" + m + "-" + d; await saveDateToDB(dateStr); alert("New date saved globally! ❤️"); }
-
-        async function fetchCraving() { try { let res = await fetch(CRAVING_FIREBASE_URL); let text = await res.json(); if (text) { document.getElementById('cravingDisplay').innerText = "🧁 Current craving: \"" + text + "\""; } else { document.getElementById('cravingDisplay').innerText = "No cravings logged yet."; } } catch(e) { console.error("Craving Fetch Error:", e); } }
+        async function fetchCraving() { try { let res = await fetch(CRAVING_FIREBASE_URL); let text = await res.json(); let el = document.getElementById('cravingDisplay'); if(el) el.innerText = text ? `🧁 Current craving: "${text}"` : "No cravings logged yet."; } catch(e) { console.error("Craving Fetch Error:", e); } }
         async function saveCraving() { const input = document.getElementById('cravingInput'); const text = input.value.trim(); if (!text) { alert("Please type what you are craving first! 🍫"); return; } try { await fetch(CRAVING_FIREBASE_URL, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(text) }); input.value = ""; fetchCraving(); alert("Craving saved! ❤️"); } catch(e) { console.error("Craving Save Error:", e); } }
-
-        async function fetchMood() { try { let res = await fetch(MOOD_FIREBASE_URL); let text = await res.json(); if (text) { document.getElementById('moodDisplay').innerText = "Current mood: " + text; } else { document.getElementById('moodDisplay').innerText = "Haven't checked in yet today."; } } catch(e) { console.error("Mood Fetch Error:", e); } }
+        async function fetchMood() { try { let res = await fetch(MOOD_FIREBASE_URL); let text = await res.json(); let el = document.getElementById('moodDisplay'); if(el) el.innerText = text ? "Current mood: " + text : "Haven't checked in yet today."; } catch(e) { console.error("Mood Fetch Error:", e); } }
         async function saveMood(moodText) { try { await fetch(MOOD_FIREBASE_URL, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(moodText) }); fetchMood(); } catch(e) { console.error("Mood Save Error:", e); } }
-
-        async function fetchLetters() { try { let res = await fetch(LETTERS_FIREBASE_URL); let letters = await res.json(); const display = document.getElementById('lettersDisplay'); if (letters && Array.isArray(letters) && letters.length > 0) { let html = ''; for(let i = letters.length - 1; i >= Math.max(0, letters.length - 20); i--) { let l = letters[i]; html += '<div class="letter-item"><span class="sender">From: ' + l.sender + '</span><div class="text">' + l.text + '</div></div>'; } display.innerHTML = html; } else { display.innerHTML = '<div class="display-box" style="text-align: center;">No letters yet. Write the first one! 💌</div>'; } } catch(e) { console.error("Letters Fetch Error:", e); } }
+        async function fetchLetters() { try { let res = await fetch(LETTERS_FIREBASE_URL); let letters = await res.json(); const display = document.getElementById('lettersDisplay'); if(!display) return; if (letters && Array.isArray(letters) && letters.length > 0) { let html = ''; for(let i = letters.length - 1; i >= Math.max(0, letters.length - 20); i--) { let l = letters[i]; html += '<div class="letter-item"><span class="sender">From: ' + l.sender + '</span><div class="text">' + l.text + '</div></div>'; } display.innerHTML = html; } else { display.innerHTML = '<div class="display-box" style="text-align: center;">No letters yet. Write the first one! 💌</div>'; } } catch(e) { console.error("Letters Fetch Error:", e); } }
         async function sendLetter() { const text = document.getElementById('letterInput').value.trim(); const sender = document.getElementById('letterSender').value.trim() || 'Unknown'; if (!text) { alert("Letter is empty! Write something sweet. 💌"); return; } let currentLetters = []; try { let res = await fetch(LETTERS_FIREBASE_URL); let data = await res.json(); if (data && Array.isArray(data)) currentLetters = data; } catch(e){} currentLetters.push({ sender: sender, text: text, time: Date.now() }); if (currentLetters.length > 50) currentLetters = currentLetters.slice(currentLetters.length - 50); try { await fetch(LETTERS_FIREBASE_URL, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(currentLetters) }); document.getElementById('letterInput').value = ""; fetchLetters(); alert("Letter sent! 💌"); } catch(e) { console.error("Letter Save Error:", e); } }
-
-        async function fetchCoupons() { try { let res = await fetch(COUPONS_FIREBASE_URL); let states = await res.json(); if (!states) states = {}; let html = ''; couponsList.forEach((c, i) => { let redeemed = states[i] === true; html += '<div class="coupon-item ' + (redeemed ? 'redeemed' : '') + '"><span class="coupon-text">' + c + '</span>' + (redeemed ? '<button class="coupon-btn reset" onclick="resetCoupon(' + i + ')">Mark Done ✅</button>' : '<button class="coupon-btn" onclick="redeemCoupon(' + i + ')">Redeem</button>') + '</div>'; }); document.getElementById('couponsDisplay').innerHTML = html; } catch(e) { console.error("Coupons Fetch Error:", e); } }
+        async function fetchCoupons() { try { let res = await fetch(COUPONS_FIREBASE_URL); let states = await res.json(); if (!states) states = {}; let html = ''; couponsList.forEach((c, i) => { let redeemed = states[i] === true; html += '<div class="coupon-item ' + (redeemed ? 'redeemed' : '') + '"><span class="coupon-text">' + c + '</span>' + (redeemed ? '<button class="coupon-btn reset" onclick="resetCoupon(' + i + ')">Mark Done ✅</button>' : '<button class="coupon-btn" onclick="redeemCoupon(' + i + ')">Redeem</button>') + '</div>'; }); let el = document.getElementById('couponsDisplay'); if(el) el.innerHTML = html; } catch(e) { console.error("Coupons Fetch Error:", e); } }
         async function redeemCoupon(index) { let states = {}; try { let res = await fetch(COUPONS_FIREBASE_URL); states = await res.json() || {}; } catch(e){} states[index] = true; try { await fetch(COUPONS_FIREBASE_URL, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(states) }); fetchCoupons(); } catch(e) { console.error("Coupon Redeem Error:", e); } }
         async function resetCoupon(index) { let states = {}; try { let res = await fetch(COUPONS_FIREBASE_URL); states = await res.json() || {}; } catch(e){} states[index] = false; try { await fetch(COUPONS_FIREBASE_URL, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(states) }); fetchCoupons(); } catch(e) { console.error("Coupon Reset Error:", e); } }
-
-        // --- NOTE & SONG LOGIC ---
-        function toggleMusicPlayer() {
-            const player = document.getElementById('musicNotePlayer');
-            const progressBar = document.getElementById('igProgressFill');
-            const mediaContainer = document.getElementById('mediaContainer');
-            const fallbackBtn = document.getElementById('ytFallbackBtn');
-            
-            if (player.classList.contains('active')) {
-                player.classList.remove('active');
-                clearInterval(igTimer);
-                mediaContainer.innerHTML = ''; // Destroys iframe, stops music
-                fallbackBtn.style.display = 'none';
-            } else {
-                player.classList.add('active');
-                
-             let url = player.getAttribute('data-url') || "";
-                let start = parseInt(player.getAttribute('data-start')) || 0;
-                let duration = parseInt(player.getAttribute('data-duration')) || 30;
-                
-                let embedHtml = '';
-                fallbackBtn.style.display = 'none';
-
-                if (url.includes('spotify.com')) {
-                    let match = url.match(/track\/([\w-]+)/) || url.match(/playlist\/([\w-]+)/);
-                    if (match && match[1]) {
-                        embedHtml = `<iframe src="https://open.spotify.com/embed/track/${match[1]}?utm_source=generator&theme=0" width="100%" height="80" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" allowfullscreen style="border:none;"></iframe>`;
-                    } else {
-                        embedHtml = `<div style="color:#888; font-size:12px; padding:10px; text-align:center;">Invalid Spotify link.</div>`;
-                    }
-                } else if (url.includes('youtube.com') || url.includes('youtu.be')) {
-                    // Bulletproof Regex to extract 11-char YouTube ID
-                    let match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=|shorts\/))([\w-]{11})/);
-                    if (match && match[1]) {
-                        let ytId = match[1];
-                        embedHtml = `<iframe width="100%" height="152" src="https://www.youtube.com/embed/${ytId}?autoplay=1&start=${start}&playsinline=1&rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border:none;"></iframe>`;
-                    } else {
-                        embedHtml = `<div style="color:#888; font-size:12px; padding:10px; text-align:center;">Invalid YouTube link.</div>`;
-                    }
-                    // ALWAYS show fallback button for YouTube
-                    fallbackBtn.setAttribute('data-href', url);
-                    fallbackBtn.style.display = 'block';
-                } else if (url) {
-                    embedHtml = `<div style="color:#888; font-size:12px; padding:10px; text-align:center;">Unsupported link format.</div>`;
-                } else {
-                    embedHtml = `<div style="color:#888; font-size:12px; padding:10px; text-align:center;">No song link set. Tap the edit (📝) button to add one!</div>`;
-                }
-
-                mediaContainer.innerHTML = embedHtml;
-                
-                progressBar.style.transition = 'none';
-             progressBar.style.width = '0%';
-                void progressBar.offsetWidth;
-                progressBar.style.transition = `width ${duration}s linear`;
-                setTimeout(() => { progressBar.style.width = '100%'; }, 50);
-                
-                clearInterval(igTimer);
-                let timeLeft = duration;
-                igTimer = setInterval(() => {
-                    timeLeft--;
-                    if (timeLeft <= 0) {
-                        clearInterval(igTimer);
-                        player.classList.remove('active');
-                        mediaContainer.innerHTML = '';
-                        fallbackBtn.style.display = 'none';
-                    }
-                }, 1000);
-            }
-        }
-
-        async function fetchNoteAndSong() {
-            try {
-                let res = await fetch(SONG_FIREBASE_URL);
-                let data = await res.json();
-                const noteContainer = document.getElementById('musicNoteContainer');
-                const player = document.getElementById('musicNotePlayer');
-                const noteTextDisplay = document.getElementById('noteTextDisplay');
-                
-                if (data && typeof data === 'object' && (data.note || data.url)) {
-                    let note = data.note || ""; 
-                    let url = data.url || "";
-                    let start = data.start || 0;
-                    let duration = data.duration || 30;
-                    
-                    noteContainer.style.display = 'flex';
-                    noteTextDisplay.innerText = note ? ("❝ " + note + " ❞") : "❝ Our Song ❞";
-
-                player.setAttribute('data-url', url);
-                    player.setAttribute('data-start', start);
-                    player.setAttribute('data-duration', duration);
-                } else {
-                    noteContainer.style.display = 'none';
-                }
-            } catch(e) { console.error("Fetch Error:", e); }
-        }
-        
-        async function saveNoteAndSong() {
-            const noteInput = document.getElementById('noteInput'); 
-            const songInput = document.getElementById('songInput');
-            const startTimeInput = document.getElementById('startTimeInput');
-            const durationSelect = document.getElementById('durationSelect');
-            
-            const note = noteInput.value.trim(); 
-            const url = songInput.value.trim();
-            const start = parseInt(startTimeInput.value) || 0;
-            const duration = parseInt(durationSelect.value) || 30;
-            
-            if (!note && !url) { alert("Please add a note or a song link!"); return; }
-            try {
-                await fetch(SONG_FIREBASE_URL, { 
-                    method: 'PUT', 
-                    headers: { 'Content-Type': 'application/json' }, 
-                    body: JSON.stringify({ note: note, url: url, start: start, duration: duration }) 
-                });
-                noteInput.value = ""; 
-                songInput.value = "";
-                startTimeInput.value = "";
-                fetchNoteAndSong(); 
-                closeModal('noteModal'); 
-                alert("Note & Song updated! ✨");
-            } catch(e) { console.error("Save Error:", e); }
-        }
-
-        
+        function toggleMusicPlayer() { const player = document.getElementById('musicNotePlayer'); const progressBar = document.getElementById('igProgressFill'); const mediaContainer = document.getElementById('mediaContainer'); const fallbackBtn = document.getElementById('ytFallbackBtn'); if (player.classList.contains('active')) { player.classList.remove('active'); clearInterval(igTimer); mediaContainer.innerHTML = ''; fallbackBtn.style.display = 'none'; } else { player.classList.add('active'); let url = player.getAttribute('data-url') || ""; let start = parseInt(player.getAttribute('data-start')) || 0; let duration = parseInt(player.getAttribute('data-duration')) || 30; let embedHtml = ''; fallbackBtn.style.display = 'none'; if (url.includes('spotify.com')) { let match = url.match(/track\/([\w-]+)/) || url.match(/playlist\/([\w-]+)/); if (match && match[1]) { embedHtml = `<iframe src="https://open.spotify.com/embed/track/${match[1]}?utm_source=generator&theme=0" width="100%" height="80" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" allowfullscreen style="border:none;"></iframe>`; } else { embedHtml = `<div style="color:#888; font-size:12px; padding:10px; text-align:center;">Invalid Spotify link.</div>`; } } else if (url.includes('youtube.com') || url.includes('youtu.be')) { let match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=|shorts\/))([\w-]{11})/); if (match && match[1]) { let ytId = match[1]; embedHtml = `<iframe width="100%" height="152" src="https://www.youtube.com/embed/${ytId}?autoplay=1&start=${start}&playsinline=1&rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border:none;"></iframe>`; } else { embedHtml = `<div style="color:#888; font-size:12px; padding:10px; text-align:center;">Invalid YouTube link.</div>`; } fallbackBtn.setAttribute('data-href', url); fallbackBtn.style.display = 'block'; } else if (url) { embedHtml = `<div style="color:#888; font-size:12px; padding:10px; text-align:center;">Unsupported link format.</div>`; } else { embedHtml = `<div style="color:#888; font-size:12px; padding:10px; text-align:center;">No song link set. Tap the edit (📝) button to add one!</div>`; } mediaContainer.innerHTML = embedHtml; progressBar.style.transition = 'none'; progressBar.style.width = '0%'; void progressBar.offsetWidth; progressBar.style.transition = `width ${duration}s linear`; setTimeout(() => { progressBar.style.width = '100%'; }, 50); clearInterval(igTimer); let timeLeft = duration; igTimer = setInterval(() => { timeLeft--; if (timeLeft <= 0) { clearInterval(igTimer); player.classList.remove('active'); mediaContainer.innerHTML = ''; fallbackBtn.style.display = 'none'; } }, 1000); } }
+        async function fetchNoteAndSong() { try { let res = await fetch(SONG_FIREBASE_URL); let data = await res.json(); const noteContainer = document.getElementById('musicNoteContainer'); const player = document.getElementById('musicNotePlayer'); const noteTextDisplay = document.getElementById('noteTextDisplay'); if (data && typeof data === 'object' && (data.note || data.url)) { let note = data.note || ""; let url = data.url || ""; let start = data.start || 0; let duration = data.duration || 30; noteContainer.style.display = 'flex'; noteTextDisplay.innerText = note ? ("❝ " + note + " ❞") : "❝ Our Song ❞"; player.setAttribute('data-url', url); player.setAttribute('data-start', start); player.setAttribute('data-duration', duration); } else { noteContainer.style.display = 'none'; } } catch(e) { console.error("Fetch Error:", e); } }
+        async function saveNoteAndSong() { const noteInput = document.getElementById('noteInput'); const songInput = document.getElementById('songInput'); const startTimeInput = document.getElementById('startTimeInput'); const durationSelect = document.getElementById('durationSelect'); const note = noteInput.value.trim(); const url = songInput.value.trim(); const start = parseInt(startTimeInput.value) || 0; const duration = parseInt(durationSelect.value) || 30; if (!note && !url) { alert("Please add a note or a song link!"); return; } try { await fetch(SONG_FIREBASE_URL, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ note: note, url: url, start: start, duration: duration }) }); noteInput.value = ""; songInput.value = ""; startTimeInput.value = ""; fetchNoteAndSong(); closeModal('noteModal'); alert("Note & Song updated! ✨"); } catch(e) { console.error("Save Error:", e); } }
+        async function fetchDateFromDB() { try { let res = await fetch(FIREBASE_URL); let dateStr = await res.json(); if (dateStr) { let parts = dateStr.split('-'); return new Date(parts[0], parts[1] - 1, parts[2]); } } catch(e) { console.error("Firebase Fetch Error:", e); } let loc = localStorage.getItem('guluDateStr'); if (loc) { let parts = loc.split('-'); return new Date(parts[0], parts[1] - 1, parts[2]); } return lastPeriodDate; }
+        async function saveDateToDB(dateStr) { localStorage.setItem('guluDateStr', dateStr); try { await fetch(FIREBASE_URL, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(dateStr) }); } catch(e) { console.error("Firebase Save Error:", e); } }
         window.onload = startIntro;
     </script>
 </body>
