@@ -16,7 +16,6 @@
         html { scroll-behavior: smooth; }
         :root { --pink-main: #ff4d6d; --pink-light: #ffccd5; --pink-bg: #fff0f3; --green-main: #8db600; --green-light: #e6ffb3; --blue-main: #4fc3f7; --blue-light: #e1f5fe; --text-dark: #5a3a45; }
         body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(135deg, #ffe6ea 0%, #fdfbfb 100%); min-height: 100vh; margin: 0; display: flex; flex-direction: column; align-items: center; color: var(--text-dark); padding: 15px; box-sizing: border-box; gap: 12px; -webkit-overflow-scrolling: touch; }
-        /* Removed overflow: hidden so the player can drop down over the page */
         .box { background: rgba(255, 255, 255, 0.98); padding: 15px; border-radius: 20px; box-shadow: 0 5px 15px rgba(255, 143, 163, 0.15); max-width: 420px; width: 100%; box-sizing: border-box; text-align: center; position: relative; overflow: visible; }
         #intro-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at center, #ff4d6d 0%, #c81d4e 100%); z-index: 99999; display: flex; justify-content: center; align-items: center; flex-direction: column; overflow: hidden; transition: opacity 0.8s ease, transform 0.8s ease; }
         #intro-heart { width: 50px; height: 50px; fill: #ffccd5; filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.6)); transform: translateZ(0) scale(0); z-index: 2; will-change: transform; }
@@ -153,7 +152,7 @@
         <div id="musicNoteContainer">
             <div id="musicNotePlayer" class="music-note-player"><div class="player-content"><div class="player-controls"><button class="edit-note-btn" onclick="openModal('noteModal')">📝</button><button class="close-note-btn" onclick="toggleMusicPlayer()">×</button></div><div id="noteTextDisplay" class="note-text-display"></div><div id="mediaContainer" style="width: 100%; height: 152px; display: flex; justify-content: center; align-items: center; border-radius: 12px; overflow: hidden; background: #f0f0f0;"></div><button id="ytFallbackBtn" onclick="window.open(this.getAttribute('data-href'), '_blank')" style="display:none; margin-top:12px; background:var(--pink-main); color:white; padding:10px 20px; border:none; border-radius:15px; font-weight:bold; cursor:pointer; width:100%;">🎵 Video blocked? Tap here to open in YouTube</button></div><div class="ig-progress-bar"><div id="igProgressFill" class="ig-progress-fill"></div></div></div>
             <div class="music-note-bubble" onclick="toggleMusicPlayer()">
-                <span style="font-size:16px;">🎀</span>
+                <span style="font-size:16px;">📝</span>
                 <span>Note</span>
             </div>
         </div>
@@ -196,54 +195,37 @@
         function getDynamicGreeting() { const h = new Date().getHours(); if (h >= 5 && h < 12) return "Good morning, my sunshine Gulu! ☀️"; if (h >= 12 && h < 17) return "Having a good day, Gulu? 🌸"; if (h >= 17 && h < 21) return "Good evening, beautiful Gulu. 🌙"; return "Sleep well, my love Gulu. Sweet dreams. 🌌"; }
         
         function startIntro() {
-            let overlay;
-            try {
-                overlay = document.getElementById('intro-overlay');
-                const heart = document.getElementById('intro-heart');
-                const percentage = document.getElementById('intro-percentage');
-                const progressFill = document.getElementById('progress-fill');
-                const duration = 1500; 
-                const startTime = performance.now();
-                
-                function animate(now) {
-                    try {
-                        let elapsed = now - startTime; 
-                        let progress = Math.min(elapsed / duration, 1); 
-                        let count = Math.floor(progress * 1000);
-                        if(percentage) percentage.innerText = count + "%"; 
-                if(progressFill) progressFill.style.width = (count / 10) + '%'; 
-                        if(heart) heart.style.transform = `translateZ(0) scale(${count / 25})`;
-                        if (progress < 1) { 
-                            requestAnimationFrame(animate); 
-                        } else { 
-                            if(percentage) percentage.innerText = "1000%"; 
-                            if(progressFill) progressFill.style.width = '100%'; 
-                            if(heart) heart.style.transform = 'translateZ(0) scale(40)'; 
-                            setTimeout(() => { 
-                                if(overlay) overlay.style.opacity = '0'; 
-                                if(overlay) overlay.style.transform = 'scale(1.1)'; 
-                                setTimeout(() => { 
-                                    if(overlay) overlay.style.display = 'none'; 
-                                    showPinPad(); 
-                                    init(); 
-                                }, 800); 
-                            }, 400); 
-                        } 
-                    } catch(e) {
-                        console.error("Animation Error:", e);
-                        if(overlay) overlay.style.display = 'none'; 
-                        showPinPad();
-                        init(); 
-                    }
-                } 
-                requestAnimationFrame(animate); 
-            } catch(e) { 
-                console.error("Intro Setup Error:", e); 
-                if(overlay) overlay.style.display = 'none'; 
-                showPinPad();
-                init(); 
-                }
+            const overlay = document.getElementById('intro-overlay');
+            const heart = document.getElementById('intro-heart');
+            const percentage = document.getElementById('intro-percentage');
+            const progressFill = document.getElementById('progress-fill');
             
+            let count = 0;
+            const interval = setInterval(() => {
+                count += 50;
+                if (count >= 1000) {
+                    count = 1000;
+                    clearInterval(interval);
+                    if(percentage) percentage.innerText = "1000%";
+                    if(progressFill) progressFill.style.width = '100%';
+                    if(heart) heart.style.transform = 'translateZ(0) scale(40)';
+                    
+                    setTimeout(() => { 
+                        if(overlay) overlay.style.opacity = '0'; 
+                        if(overlay) overlay.style.transform = 'scale(1.1)'; 
+                        setTimeout(() => { 
+                            if(overlay) overlay.style.display = 'none'; 
+                            showPinPad(); 
+                            init(); 
+                        }, 800); 
+                    }, 400); 
+                    return;
+                }
+                if(percentage) percentage.innerText = count + "%";
+                if(progressFill) progressFill.style.width = (count / 10) + '%';
+                if(heart) heart.style.transform = `translateZ(0) scale(${count / 25})`;
+            }, 40);
+        }
         
         function spawnHeartBubbles() { try { for(let i=0; i<8; i++) { let bubble = document.createElement('div'); bubble.className = 'heart-bubble'; let size = 20 + Math.random() * 40; bubble.style.width = size + 'px'; bubble.style.height = size + 'px'; bubble.style.marginLeft = (Math.random() * 50) + 'px'; bubble.style.marginBottom = (Math.random() * 50) + 'px'; bubble.style.animationDuration = (1.2 + Math.random() * 0.8) + 's'; bubble.innerHTML = `<svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="rgba(255, 77, 109, 0.35)" stroke="rgba(255, 255, 255, 0.8)" stroke-width="0.5"/></svg>`; document.body.appendChild(bubble); setTimeout(() => bubble.remove(), 2000); } } catch(e){} }
         function setupNotifications() { if (!("Notification" in window)) return; if (Notification.permission === "default") Notification.requestPermission(); setInterval(() => { const now = new Date(); const lastAlert = localStorage.getItem('lastPhotoAlert'); const todayStr = getTodayStr(); if (now.getHours() === 9 && now.getMinutes() === 0 && lastAlert !== todayStr) { if (Notification.permission === "granted") { new Notification("📸 Daily Polaroid Time!", { body: "Good morning! Don't forget to upload your photo for Gulu. ❤️" }); localStorage.setItem('lastPhotoAlert', todayStr); } } }, 60000); }
@@ -278,7 +260,7 @@
                         else { clientX = e.clientX; clientY = e.clientY; }
                         return { x: clientX - rect.left, y: clientY - rect.top };
                     }
-                 function scratch(pos) {
+                    function scratch(pos) {
                         ctx.globalCompositeOperation = 'destination-out';
                         ctx.beginPath();
                         ctx.arc(pos.x, pos.y, 25, 0, Math.PI * 2);
@@ -344,7 +326,7 @@
         function openDatePicker() { isDatePicker = true; const el = document.getElementById('modalTitle'); if(el) el.innerText = "Select Start Date"; const instr = document.getElementById('modalInstructions'); if(instr) instr.style.display = 'block'; viewYear = new Date().getFullYear(); viewMonth = new Date().getMonth(); renderFullCalendar(true); const modal = document.getElementById('calendarModal'); if(modal) modal.classList.add('active'); spawnHeartBubbles(); }
         function openModal(id) { if (id === 'calendarModal') openCalendarView(); else { const el = document.getElementById(id); if(el) el.classList.add('active'); spawnHeartBubbles(); } }
         function closeModal(id) { const el = document.getElementById(id); if(el) el.classList.remove('active'); spawnHeartBubbles(); }
-       function changeMonth(dir) { viewMonth += dir; if (viewMonth < 0) { viewMonth = 11; viewYear--; } if (viewMonth > 11) { viewMonth = 0; viewYear++; } renderFullCalendar(isDatePicker); }
+        function changeMonth(dir) { viewMonth += dir; if (viewMonth < 0) { viewMonth = 11; viewYear--; } if (viewMonth > 11) { viewMonth = 0; viewYear++; } renderFullCalendar(isDatePicker); }
         function renderFullCalendar(forDatePicking = false) { try { const grid = document.getElementById('fullCalendarGrid'); if(!grid) return; grid.innerHTML = ''; const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]; const lbl = document.getElementById('monthLabel'); if(lbl) lbl.innerText = monthNames[viewMonth] + " " + viewYear; const daysOfWeek = ['S', 'M', 'T', 'W', 'T', 'F', 'S']; daysOfWeek.forEach(day => { grid.innerHTML += '<div class="cal-cell cal-header">' + day + '</div>'; }); const startRenderDate = new Date(viewYear, viewMonth, 1); const startDay = startRenderDate.getDay(); startRenderDate.setDate(startRenderDate.getDate() - startDay); const today = new Date(); today.setHours(0,0,0,0); for(let i = 0; i < 42; i++) { let cellDate = new Date(startRenderDate); cellDate.setDate(startRenderDate.getDate() + i); const status = forDatePicking ? '' : getDayStatus(cellDate); const isToday = cellDate.getTime() === today.getTime(); let prevDate = new Date(cellDate); prevDate.setDate(cellDate.getDate() - 1); let nextDate = new Date(cellDate); nextDate.setDate(cellDate.getDate() + 1); const prevStatus = forDatePicking ? '' : getDayStatus(prevDate); const nextStatus = forDatePicking ? '' : getDayStatus(nextDate); let cell = document.createElement('div'); let classes = 'cal-cell ' + status + (isToday && !forDatePicking ? ' today' : ''); if (cellDate.getMonth() !== viewMonth) classes += ' out-of-month'; if ((status === 'period' || status === 'ovulation') && status === prevStatus) classes += ' no-left-radius'; if ((status === 'period' || status === 'ovulation') && status === nextStatus) classes += ' no-right-radius'; cell.className = classes; if (cellDate.getMonth() !== viewMonth) cell.style.opacity = '0.3'; cell.innerText = cellDate.getDate(); if (forDatePicking) { cell.onclick = () => confirmNewDate(cellDate); } grid.appendChild(cell); } } catch(e) { console.error("Render Calendar Error:", e); } }
         function updateDashboard() { try { const today = new Date(); today.setHours(0,0,0,0); const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']; let baseCycleStart = new Date(lastPeriodDate); baseCycleStart.setHours(0,0,0,0); while (baseCycleStart.getTime() + cycleLength * 86400000 <= today.getTime()) { baseCycleStart.setDate(baseCycleStart.getDate() + cycleLength); } let nextPeriodStart = new Date(baseCycleStart); if (today > new Date(baseCycleStart.getTime() + (periodDuration - 1) * 86400000)) { nextPeriodStart.setDate(nextPeriodStart.getDate() + cycleLength); } let periodEnd = new Date(nextPeriodStart); periodEnd.setDate(nextPeriodStart.getDate() + periodDuration - 1); let fertileStart = new Date(baseCycleStart); fertileStart.setDate(baseCycleStart.getDate() + 11); let fertileEnd = new Date(baseCycleStart); fertileEnd.setDate(baseCycleStart.getDate() + 18); if (today > fertileEnd) { fertileStart.setDate(fertileStart.getDate() + cycleLength); fertileEnd.setDate(fertileEnd.getDate() + cycleLength); } let pmsBasePeriod = new Date(nextPeriodStart); if (today >= nextPeriodStart && today <= periodEnd) { pmsBasePeriod.setDate(pmsBasePeriod.getDate() + cycleLength); } let pmsStart = new Date(pmsBasePeriod); pmsStart.setDate(pmsBasePeriod.getDate() - 3); let pmsEnd = new Date(pmsBasePeriod); pmsEnd.setDate(pmsBasePeriod.getDate() - 1); const formatDateRange = (d1, d2) => { let txt = d1.getDate() + ""; if (d1.getMonth() !== d2.getMonth()) { txt += " " + months[d1.getMonth()]; } txt += " - " + d2.getDate() + " " + months[d2.getMonth()]; return txt; }; const ovrEl = document.getElementById('nextOvulationDate'); if(ovrEl) ovrEl.innerText = formatDateRange(fertileStart, fertileEnd); const pmsEl = document.getElementById('nextPmsDate'); if(pmsEl) pmsEl.innerText = formatDateRange(pmsStart, pmsEnd); const prdEl = document.getElementById('nextPeriodDate'); if(prdEl) prdEl.innerText = formatDateRange(nextPeriodStart, periodEnd); } catch(e) { console.error("Dashboard Error:", e); } }
         async function confirmNewDate(selectedDate) { lastPeriodDate = selectedDate; updateDisplay(); closeModal('calendarModal'); let y = selectedDate.getFullYear(); let m = String(selectedDate.getMonth() + 1).padStart(2, '0'); let d = String(selectedDate.getDate()).padStart(2, '0'); let dateStr = y + "-" + m + "-" + d; await saveDateToDB(dateStr); alert("New date saved globally! ❤️"); }
