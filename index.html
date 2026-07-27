@@ -182,6 +182,7 @@
         const COUPONS_FIREBASE_URL = "https://gulu100103-default-rtdb.asia-southeast1.firebasedatabase.app/coupons.json";
         const PHOTOS_FIREBASE_URL = "https://gulu100103-default-rtdb.asia-southeast1.firebasedatabase.app/photos.json";
         const SONG_FIREBASE_URL = "https://gulu100103-default-rtdb.asia-southeast1.firebasedatabase.app/song.json";
+        const SCRATCH_FIREBASE_URL = "https://gulu100103-default-rtdb.asia-southeast1.firebasedatabase.app/scratch.json";
         const couponsList = ["💆‍♀️ 1 Free Back Massage","🚗 I'll pick you up today","🫂 Long Hug whenever we meet","🌅 Breakfast/Dinner Date","🍿 You pick the movie tonight"];
         const scratchSurprises = ["Free Ice Cream today! 🍦", "Free Back Massage 💆‍♀️", "Free Chocolate for you! 🍫", "Free Foot Massage! 🦶", "Free Pizza tonight! 🍕", "Free Long Hug! 🫂", "Free Boba/Bubble Tea! 🧋", "Free Movie Night! 🍿", "Free Donut treat! 🍩", "Free Cuddles! 🧸"]; 
         const notes = ["You are my favorite notification. Have a beautiful day, Gulu! 💕","Just a daily reminder that you are deeply loved and cherished. 🥰","Drink some water, take a deep breath, and know I'm thinking of you! 💧","Your smile is my favorite thing in the whole world. Keep shining! ✨","I'm so incredibly lucky to have you in my life. ❤️","Whatever today brings, we handle it together. I love you! 🌸","You are stronger and more beautiful than you know, Gulu! 🦋","Sending you a massive virtual hug right now! 🤗","You make every single day better just by being in it. ☀️","Don't forget to treat yourself today. You deserve the world! 🍫","I love you more today than I did yesterday. ❤️","You are my safe place and my favorite adventure. 🌍","Take it easy today, Gulu. I'm always right here for you. 🛋️","Your laugh is my favorite melody. Hope you smile a lot today! 🎶","Just dropping in to say: You are absolutely perfect to me. 😍","You're doing amazing, sweetie! Keep going! 🌟","I hope your day is as sweet and beautiful as you are. 🌷","If you're feeling tired, rest. I've got your back, always. 🛌","You are the best thing that ever happened to me. 💖","Every day I spend with you is my new favorite day. 📆","I'm sending you all my energy and love today! ⚡❤️","You are a literal angel. Never forget that! 👼","I'm so proud of you and everything you do. 🏆","You mean the universe to me, Gulu. 🌌","Take a moment to relax today. You've earned it! 🛀","You're my forever favorite person. 👩‍❤️‍👨","I love you past the moon and the stars! 🚀","Whenever you feel stressed, remember I'm just a call away. 📞","You look gorgeous today (I just know it!). 👗","My love for you grows bigger every single day. 📈","You are my dream come true. Sweet dreams, my Gulu. 💭"];
@@ -230,17 +231,42 @@
         
         function spawnHeartBubbles() { try { for(let i=0; i<8; i++) { let bubble = document.createElement('div'); bubble.className = 'heart-bubble'; let size = 20 + Math.random() * 40; bubble.style.width = size + 'px'; bubble.style.height = size + 'px'; bubble.style.marginLeft = (Math.random() * 50) + 'px'; bubble.style.marginBottom = (Math.random() * 50) + 'px'; bubble.style.animationDuration = (1.2 + Math.random() * 0.8) + 's'; bubble.innerHTML = `<svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="rgba(255, 77, 109, 0.35)" stroke="rgba(255, 255, 255, 0.8)" stroke-width="0.5"/></svg>`; document.body.appendChild(bubble); setTimeout(() => bubble.remove(), 2000); } } catch(e){} }
         function setupNotifications() { if (!("Notification" in window)) return; if (Notification.permission === "default") Notification.requestPermission(); setInterval(() => { const now = new Date(); const lastAlert = localStorage.getItem('lastPhotoAlert'); const todayStr = getTodayStr(); if (now.getHours() === 9 && now.getMinutes() === 0 && lastAlert !== todayStr) { if (Notification.permission === "granted") { new Notification("📸 Daily Polaroid Time!", { body: "Good morning! Don't forget to upload your photo for Gulu. ❤️" }); localStorage.setItem('lastPhotoAlert', todayStr); } } }, 60000); }
-        function setupScratchCard() {
+       async function setupScratchCard() {
             try {
                 const canvas = document.getElementById('scratchCanvas');
                 if (!canvas) return;
                 const prizeDiv = document.getElementById('scratchPrize');
                 if (!prizeDiv) return;
+                
                 const todayStr = getTodayStr();
-                const savedScratchDate = localStorage.getItem('scratchDate');
-                let prizeIndex = parseInt(localStorage.getItem('scratchPrizeIndex'));
-                if (savedScratchDate !== todayStr || isNaN(prizeIndex)) { prizeIndex = Math.floor(Math.random() * scratchSurprises.length); localStorage.setItem('scratchDate', todayStr); localStorage.setItem('scratchPrizeIndex', prizeIndex); }
+                
+                // 1. Fetch the scratch card data from Firebase
+                let prizeIndex = -1;
+                let scratchDate = "";
+                try {
+                    let res = await fetch(SCRATCH_FIREBASE_URL);
+                    let data = await res.json();
+                    if (data) {
+                        scratchDate = data.date;
+                        prizeIndex = data.prizeIndex;
+                    }
+                } catch(e) {}
+
+                // 2. If it's a new day or no prize is saved, pick a new one and save it to Firebase
+                if (scratchDate !== todayStr || isNaN(prizeIndex) || prizeIndex < 0) {
+                    prizeIndex = Math.floor(Math.random() * scratchSurprises.length);
+                    try {
+                        await fetch(SCRATCH_FIREBASE_URL, {
+                            method: 'PUT',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ date: todayStr, prizeIndex: prizeIndex })
+                        });
+                    } catch(e) {}
+                }
+                
                 prizeDiv.innerText = scratchSurprises[prizeIndex];
+                
+                // 3. Draw the cover
                 setTimeout(() => {
                     const ctx = canvas.getContext('2d');
                     canvas.width = canvas.offsetWidth || 300;
@@ -282,7 +308,7 @@
                     document.addEventListener('mouseup', stopDraw);
                 }, 200);
             } catch(e) { console.error("Scratch Card Setup Error:", e); }
-        }
+                }
         function handlePhotoUpload(inputElement, person) { const file = inputElement.files[0]; if (!file) return; const reader = new FileReader(); reader.onload = function(e) { const img = new Image(); img.onload = function() { const canvas = document.createElement('canvas'); const ctx = canvas.getContext('2d'); const MAX_WIDTH = 300; let scale = MAX_WIDTH / img.width; canvas.width = MAX_WIDTH; canvas.height = img.height * scale; ctx.drawImage(img, 0, 0, canvas.width, canvas.height); const base64Str = canvas.toDataURL('image/jpeg', 0.6); savePhotoToDB(person, base64Str); }; img.src = e.target.result; }; reader.readAsDataURL(file); }
         async function savePhotoToDB(person, base64Str) { const todayStr = getTodayStr(); try { let res = await fetch(PHOTOS_FIREBASE_URL); let photos = await res.json() || {}; photos[person] = { date: todayStr, img: base64Str }; await fetch(PHOTOS_FIREBASE_URL, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(photos) }); fetchPhotos(); alert("Photo uploaded for today! ❤️"); } catch(e) { console.error("Photo Save Error:", e); alert("Failed to upload photo."); } }
         async function fetchPhotos() { try { let res = await fetch(PHOTOS_FIREBASE_URL); let photos = await res.json() || {}; const todayStr = getTodayStr(); const nikkiContainer = document.getElementById('nikkiImgContainer'); if (nikkiContainer) { if (photos.nikki && photos.nikki.date === todayStr && photos.nikki.img) nikkiContainer.innerHTML = `<img src="${photos.nikki.img}" class="polaroid-img">`; else nikkiContainer.innerHTML = "Waiting for Nikki's photo..."; } const guluContainer = document.getElementById('guluImgContainer'); if (guluContainer) { if (photos.gulu && photos.gulu.date === todayStr && photos.gulu.img) guluContainer.innerHTML = `<img src="${photos.gulu.img}" class="polaroid-img">`; else guluContainer.innerHTML = "Waiting for Gulu's photo..."; } } catch(e) { console.error("Photo Fetch Error:", e); } }
